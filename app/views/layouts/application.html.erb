@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sistema de Liquidación de complementarias</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>	
+	<div class="container">		
+	    <div class="page-header">
+    		<h1><%= image_tag "logo.png" %> <small>Sistema de Liquidación de complementarias</small></h1>
+    	</div>
+	    <div class="navbar">
+    		<div class="navbar-inner">
+          <ul class="nav">
+            <li><%= link_to "Inicio", index_path %></li>
+            <li><%= link_to "Liquidaciones", liquidacions_path %></li>
+            <li><%= link_to "Plantas", agente_cargos_path %></li>
+            <li><%= link_to "Agentes", agentes_path %></li>
+            <li><%= link_to "Cargos", cargos_path %></li>
+            <li><%= link_to "Conceptos", conceptos_path %></li>            
+            <li><%= link_to "Establecimientos", establecimientos_path %></li>            
+          </ul>
+        </div>    
+    	</div>    
+      <div class="container">   
+	       <%= yield %>
+      </div>
+	</div>
+   <div class="row footer text-center">
+      <hr/>
+      <p>&copy; <em>Dirección de Recursos Tecnológicos - Ministerio de Educación de la Provincia del Chubut</em></p>
+      <!--<address>
+        <a href="mailto:recursosmec@gmail.com">recursosmec@gmail.com</a>
+      </address>-->
+  </div>
+</body>
+</html>

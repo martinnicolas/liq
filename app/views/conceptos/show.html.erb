@@ -1,0 +1,50 @@
+<ul class="nav nav-pills">
+  <li><%= link_to 'Volver', conceptos_path %></li>
+  <li><%= link_to 'Editar', edit_concepto_path(@concepto) %></li> 
+</ul>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Código: </b><%= @concepto.codigo %>
+</p>
+
+<p>
+  <b>Nombre: </b><%= @concepto.nombre %>
+</p>
+
+<p>
+  <b>Cálculo de cargos: </b><%= @concepto.calculo_cargos %>
+</p>
+
+<p>
+  <b>Cálculo de horas de media: </b><%= @concepto.calculo_horas_media %>
+</p>
+
+<p>
+  <b>Cálculo de horas de superior: </b><%= @concepto.calculo_horas_superior %>
+</p>
+
+<p>
+  <b>Requerido: </b><%= @concepto.requerido %>
+</p>
+
+<p>
+  <b>Carga manual: </b><%= @concepto.carga_manual %>
+</p>
+
+<p>
+  <b>Ayuda: </b><%= @concepto.ayuda %>
+</p>
+
+<p>
+  <b>Activado por defecto: </b><%= @concepto.activado_x_defecto %>
+</p>
+
+<p>
+  <b>Tipo: </b><%= @concepto.tipo %>
+</p>
+
+<p>
+  <b>Tipo liquidación: </b><%= @concepto.tipo_liquidacion %>
+</p>

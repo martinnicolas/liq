@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  categoria: MyString
+  tipo_cargo: MyString
+  nivel: MyString
+  descripcion: MyString
+  puntos: 1.5
+  indice: 1.5
+  hscargo: 1.5
+  doble: MyString
+  hbase: MyString
+  testigo: 1.5
+  basico: 1.5
+  hstexto: MyString
+
+two:
+  categoria: MyString
+  tipo_cargo: MyString
+  nivel: MyString
+  descripcion: MyString
+  puntos: 1.5
+  indice: 1.5
+  hscargo: 1.5
+  doble: MyString
+  hbase: MyString
+  testigo: 1.5
+  basico: 1.5
+  hstexto: MyString

@@ -1,0 +1,32 @@
+<ul class="nav nav-pills">
+  <li><%= link_to 'Volver', agentes_path %></li>
+  <li><%= link_to 'Editar', edit_agente_path(@agente) %></li> 
+</ul>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>DNI: </b><%= @agente.dni %>
+</p>
+
+<p>
+  <b>Apellido: </b><%= @agente.apellido %>
+</p>
+
+<p>
+  <b>Nombre: </b><%= @agente.nombre %>
+</p>
+
+<p>
+  <b>CUIT/CUIL: </b><%= @agente.cuit_cuil %>
+</p>
+
+<p>
+  <b>Fecha ingreso: </b><%= @agente.fecha_ingreso %>
+</p>
+
+<p>
+  <b>Localidad: </b><%= Localidad.find(@agente.localidad_id).nombre %>
+</p>
+
+

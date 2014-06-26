@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  codigo: MyString
+  nombre: MyString
+  calculo_cargos: MyString
+  calculo_horas_media: MyString
+  calculo_horas_superior: MyString
+  requerido: MyString
+  carga_manual: MyString
+  ayuda: MyString
+  activado_x_defecto: MyString
+  tipo: MyString
+  tipo_liquidacion: MyString
+
+two:
+  codigo: MyString
+  nombre: MyString
+  calculo_cargos: MyString
+  calculo_horas_media: MyString
+  calculo_horas_superior: MyString
+  requerido: MyString
+  carga_manual: MyString
+  ayuda: MyString
+  activado_x_defecto: MyString
+  tipo: MyString
+  tipo_liquidacion: MyString

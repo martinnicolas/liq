@@ -1,0 +1,2 @@
+rails g scaffold Concepto codigo:string nombre:string calculo_cargos:string calculo_horas_media:string calculo_horas_superior:string requerido:string carga_manual:string ayuda:string 
+activado_x_defecto:string tipo:string   

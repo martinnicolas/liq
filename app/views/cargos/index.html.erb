@@ -1,0 +1,53 @@
+<h4>Listado de cargos</h4>
+
+<ul class="nav nav-pills">
+    <li><%= link_to 'Nuevo cargo', new_cargo_path %></li>
+</ul>
+
+<%= render 'form_indice' %>
+
+<table class="table table-striped">
+  <tr>
+    <th>Categoría</th>
+    <th>Tipo de cargo</th>
+    <th>Nivel</th>
+    <th>Descripción</th>
+    <th>Puntos</th>
+    <th>Índice</th>
+    <th>Hs. Cargo</th>
+    <th>Doble</th>
+    <th>Hs. Base</th>
+    <th>Testigo</th>
+    <th>Básico</th>
+    <th>Hs. Texto</th>
+    <th>&nbsp;</th>
+  </tr>
+
+<% @cargos.each do |cargo| %>
+  <tr>
+    <td><%= cargo.categoria %></td>
+    <td><%= cargo.tipo_cargo %></td>
+    <td><%= cargo.nivel %></td>
+    <td><%= cargo.descripcion %></td>
+    <td><%= cargo.puntos %></td>
+    <td><%= cargo.indice %></td>
+    <td><%= cargo.hscargo %></td>
+    <td><%= cargo.doble %></td>
+    <td><%= cargo.hbase %></td>
+    <td><%= cargo.testigo %></td>
+    <td><%= cargo.basico %></td>
+    <td><%= cargo.hstexto %></td>
+    <td>
+    <div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><%= link_to 'Ver', cargo %></li>
+    <li><%= link_to 'Editar', edit_cargo_path(cargo) %></li>
+    <li><%= link_to 'Eliminar', cargo, method: :delete, data: { confirm: 'Está seguro de querer eliminar este cargo?' } %></li>
+  </ul>
+</div>
+    </td>
+  </tr>
+<% end %>
+</table>

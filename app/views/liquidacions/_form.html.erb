@@ -1,0 +1,39 @@
+<%= form_for(@liquidacion) do |f| %>
+  <% if @liquidacion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@liquidacion.errors.count, "error") %> prohibited this liquidacion from being saved:</h2>
+
+      <ul>
+      <% @liquidacion.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="formulario">
+    <tr>
+      <th><%= f.label :fecha %></th><td><%= f.datepicker :fecha, :style => "width: 80px;" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :tipo_liquidacion, "Tipo de liquidación" %></th><td><%= f.text_field :tipo_liquidacion, :style => "width: 200px;" %></td>
+    </tr>
+    <tr><th><%= f.label :agente_cargo_id, "Planta" %></th><td><%= f.collection_select :agente_cargo_id, AgenteCargo.all, :id, :nombre_completo %></td></tr>
+    <tr><th><%= f.label :dias_trabajados %></th><td><%= f.text_field :dias_trabajados, :style => "width: 50px;" %></td></tr>    
+  </table> 
+
+  <div class="alert alert-info"> 
+    Marque todos los <b>conceptos</b> que desee incluir en la <b>liquidación</b>
+  </div>  
+
+  <table class="formulario">
+  <% @conceptos.each do |c| %>
+    <tr><th><%= label_tag c.nombre %></th><td><%= check_box("value",c.requerido) %></td></tr>
+  <% end %>
+  </table>
+
+  <div class="actions">
+    <%= f.submit :class => "btn btn-primary", :value => 'Guardar' %>
+  </div>  
+
+<% end %>

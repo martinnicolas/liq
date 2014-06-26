@@ -1,0 +1,26 @@
+<ul class="nav nav-pills">
+  <li><%= link_to 'Volver', establecimientos_path %></li>
+  <li><%= link_to 'Editar', edit_establecimiento_path(@establecimiento) %></li> 
+</ul>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Número: </b><%= @establecimiento.numero %>
+</p>
+
+<p>
+  <b>Nombre: </b><%= @establecimiento.nombre %>
+</p>
+
+<p>
+  <b>Dirección: </b><%= @establecimiento.direccion %>
+</p>
+
+<p>
+  <b>CUE: </b><%= @establecimiento.cue %>
+</p>
+
+<p>
+  <b>Localidad: </b><%= Localidad.find(@establecimiento.localidad_id).nombre %>
+</p>

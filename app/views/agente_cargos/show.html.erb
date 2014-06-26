@@ -1,0 +1,30 @@
+<ul class="nav nav-pills">
+  <li><%= link_to 'Volver', agente_cargos_path %></li>
+  <li><%= link_to 'Editar', edit_agente_cargo_path(@agente_cargo) %></li> 
+</ul>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Fecha: </b><%= @agente_cargo.fecha %>
+</p>
+
+<p>
+  <b>Estado: </b><%= @agente_cargo.estado %>
+</p>
+
+<p>
+  <b>Descripción: </b><%= @agente_cargo.descripcion %>
+</p>
+
+<p>
+  <b>Agente: </b><%= Agente.find(@agente_cargo.agente_id).apellido_y_nombre %>
+</p>
+
+<p>
+  <b>Cargo: </b><%= Cargo.find(@agente_cargo.cargo_id).nombre_completo %>
+</p>
+
+<p>
+  <b>Establecimiento: </b><%= Establecimiento.find(@agente_cargo.establecimiento_id).nombre_completo %>
+</p>

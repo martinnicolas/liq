@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  fecha: 2014-06-26
+  tipo_liquidacion: MyString
+  dias_trabajados: 1
+  agente_cargo_id: 1
+
+two:
+  fecha: 2014-06-26
+  tipo_liquidacion: MyString
+  dias_trabajados: 1
+  agente_cargo_id: 1

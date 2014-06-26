@@ -1,0 +1,31 @@
+<%= form_for(@agente_cargo) do |f| %>
+  <% if @agente_cargo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@agente_cargo.errors.count, "error") %> prohibited this agente_cargo from being saved:</h2>
+
+      <ul>
+      <% @agente_cargo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="formulario">
+    <tr>
+      <th><%= f.label :fecha %></th><td><%= f.datepicker :fecha, :style => "width: 80px;" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :estado %></th><td><%= f.text_field :estado, :style => "width: 100px;" %></td>
+    </tr>
+    <tr><th><%= f.label :descripcion, "Descripción" %></th><td><%= f.text_field :descripcion, :style => "width: 350px;" %></td></tr>    
+    <tr><th><%= f.label :agente_id, "Agente" %></th><td><%= f.collection_select :agente_id, Agente.all, :id, :apellido_y_nombre %></td></tr>
+    <tr><th><%= f.label :cargo_id, "Cargo" %></th><td><%= f.collection_select :cargo_id, Cargo.all, :id, :nombre_completo %></td></tr>
+    <tr><th><%= f.label :establecimiento_id, "Establecimiento" %></th><td><%= f.collection_select :establecimiento_id, Establecimiento.all, :id, :nombre_completo %></td></tr>
+  </table> 
+
+  <div class="actions">
+    <%= f.submit :class => "btn btn-primary", :value => 'Guardar' %>
+  </div>  
+
+<% end %>

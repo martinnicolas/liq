@@ -1,0 +1,1 @@
+rails g scaffold Cargo mes:string categoria:string tipo_cargo:string nivel:string descripcion:string puntos:double indice:double hscargo:double 

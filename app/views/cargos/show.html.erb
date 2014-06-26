@@ -1,0 +1,43 @@
+<ul class="nav nav-pills">
+  <li><%= link_to 'Volver', cargos_path %></li>
+  <li><%= link_to 'Editar', edit_cargo_path(@cargo) %></li> 
+</ul>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Categoría: </b> <%= @cargo.categoria %>
+</p>
+<p>
+  <b>Tipo cargo: </b><%= @cargo.tipo_cargo %>
+</p>
+<p>
+  <b>Nivel: </b><%= @cargo.nivel %>
+</p>
+<p>
+  <b>Descripcion: </b><%= @cargo.descripcion %>
+</p>
+<p>
+  <b>Puntos: </b><%= @cargo.puntos %>
+</p>
+<p>
+  <b>Índice: </b><%= @cargo.indice %>
+</p>
+<p>
+  <b>Hs. Cargo: </b><%= @cargo.hscargo %>
+</p>
+<p>
+  <b>Doble: </b><%= @cargo.doble %>
+</p>
+<p>
+  <b>Hs. Base: </b><%= @cargo.hbase %>
+</p>
+<p>
+  <b>Testigo: </b><%= @cargo.testigo %>
+</p>
+<p>
+  <b>Básico: </b><%= @cargo.basico %>
+</p>
+<p>
+  <b>Hs. Texto: </b><%= @cargo.hstexto %>
+</p>

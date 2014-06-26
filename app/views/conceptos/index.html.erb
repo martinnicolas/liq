@@ -1,0 +1,45 @@
+<h4>Listado de conceptos</h4>
+
+<ul class="nav nav-pills">
+    <li><%= link_to 'Nuevo concepto', new_concepto_path %></li>
+</ul>
+
+<table class="table table-striped">
+  <tr>
+    <th>Código</th>
+    <th>Nombre</th>
+    <th>Cálculo cargos</th>
+    <th>Cálculo horas media</th>
+    <th>Cálculo horas superior</th>
+    <th>Requerido</th>
+    <th>Carga manual</th>
+    <th>Activado</th>
+    <th>Tipo</th>
+    <th></th>
+  </tr>
+
+<% @conceptos.each do |concepto| %>
+  <tr>
+    <td><%= concepto.codigo %></td>
+    <td><%= concepto.nombre %></td>
+    <td><%= concepto.calculo_cargos %></td>
+    <td><%= concepto.calculo_horas_media %></td>
+    <td><%= concepto.calculo_horas_superior %></td>
+    <td><%= concepto.requerido %></td>
+    <td><%= concepto.carga_manual %></td>
+    <td><%= concepto.activado_x_defecto %></td>
+    <td><%= concepto.tipo %></td>    
+    <td>
+    <div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><%= link_to 'Ver', concepto %></li>
+    <li><%= link_to 'Editar', edit_concepto_path(concepto) %></li>
+    <li><%= link_to 'Eliminar', concepto, method: :delete, data: { confirm: 'Está seguro de querer eliminar este concepto?' } %></li>
+  </ul>
+</div>
+    </td>
+  </tr>
+<% end %>
+</table>

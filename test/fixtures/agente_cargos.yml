@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  fecha: 2014-06-26
+  estado: MyString
+  descripcion: MyString
+  agente_id: 1
+  cargo_id: 1
+  establecimiento_id: 1
+
+two:
+  fecha: 2014-06-26
+  estado: MyString
+  descripcion: MyString
+  agente_id: 1
+  cargo_id: 1
+  establecimiento_id: 1

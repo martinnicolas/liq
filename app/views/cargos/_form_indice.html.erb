@@ -1,0 +1,11 @@
+
+<%= form_tag( { :action => :actualizar_indice, }, { :method => :post, :class => "navbar-form pull-left" }) do %>
+
+  <table class="formulario">
+  <tr>
+    <th><%= text_field_tag "nuevo_indice", "", :class => "span2" %></th>
+    <td><%= submit_tag( "Actualizar índice", :class => "btn btn-primary", :value => 'Actualizar índice') %></td>
+  </tr>
+  </table>
+
+<% end %>

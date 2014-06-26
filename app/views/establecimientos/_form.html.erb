@@ -1,0 +1,33 @@
+<%= form_for(@establecimiento) do |f| %>
+  <% if @establecimiento.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@establecimiento.errors.count, "error") %> prohibited this establecimiento from being saved:</h2>
+
+      <ul>
+      <% @establecimiento.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="formulario">
+    <tr>
+      <th><%= f.label :numero, "Número" %></th><td><%= f.text_field :numero, :style => "width: 80px;" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :nombre %></th><td><%= f.text_field :nombre, :style => "width: 350px;" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :direccion, "Dirección" %></th><td><%= f.text_field :direccion, :style => "width: 300px;" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :cue, "CUE" %></th><td><%= f.text_field :cue, :style => "width: 100px;" %></td>
+    </tr>
+    <tr><th><%= f.label :localidad_id, "Localidad" %></th><td><%= f.collection_select :localidad_id, Localidad.all, :id, :nombre %></td></tr>    
+  </table> 
+
+  <div class="actions">
+    <%= f.submit :class => "btn btn-primary", :value => 'Guardar' %>
+  </div>  
+<% end %>

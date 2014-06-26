@@ -1,0 +1,2 @@
+module AgenteCargosHelper
+end

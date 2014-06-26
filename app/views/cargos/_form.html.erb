@@ -1,0 +1,37 @@
+<%= form_for(@cargo) do |f| %>
+  <% if @cargo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cargo.errors.count, "error") %> prohibited this cargo from being saved:</h2>
+
+      <ul>
+      <% @cargo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="formulario">
+    <tr>
+      <th><%= f.label :categoria, "Categoría" %></th><td><%= f.text_field :categoria, :style => "width: 100px;" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :tipo_cargo, "Tipo de cargo" %></th><td><%= f.text_field :tipo_cargo, :style => "width: 100px;" %></td>
+    </tr>
+    <tr><th><%= f.label :nivel %></th><td><%= f.text_field :nivel, :maxlength => 2 %></td></tr>
+    <tr><th><%= f.label :descripcion, "Descripción" %></th><td><%= f.text_field :descripcion, :style => "width: 350px;" %></td>
+    </tr>
+    <tr><th><%= f.label :puntos %></th><td><%= f.text_field :puntos, :style => "width: 100px;" %></td></tr>
+    <tr><th><%= f.label :indice, "Índice" %></th><td><%= f.text_field :indice, :style => "width: 100px;" %></td></tr>
+    <tr><th><%= f.label :hscargo,"Hs. Cargo" %></th><td><%= f.text_field :hscargo, :style => "width: 100px;" %></td></tr>
+    <tr><th><%= f.label :doble, "Doble" %></th><td><%= f.text_field :doble,:maxlength => 10 %></td></tr>
+    <tr><th><%= f.label :hbase, "Hs. Base" %></th><td><%= f.text_field :hbase, :maxlength => 10 %></td></tr>
+    <tr><th><%= f.label :testigo, "Testigo" %></th><td><%= f.text_field :testigo, :maxlength => 10 %></td></tr>
+    <tr><th><%= f.label :basico, "Básico" %></th><td><%= f.text_field :basico, :style => "width: 100px;" %></td></tr>
+    <tr><th><%= f.label :hstexto, "Hs. Texto" %></th><td><%= f.text_field :hstexto, :style => "width: 100px" %></td></tr>
+  </table> 
+
+  <div class="actions">
+    <%= f.submit :class => "btn btn-primary", :value => 'Guardar' %>
+  </div>  
+<% end %>

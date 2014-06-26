@@ -1,0 +1,22 @@
+<ul class="nav nav-pills">
+  <li><%= link_to 'Volver', liquidacions_path %></li>
+  <li><%= link_to 'Editar', edit_liquidacion_path(@liquidacion) %></li> 
+</ul>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Fecha:</b><%= @liquidacion.fecha %>
+</p>
+
+<p>
+  <b>Tipo de liquidacion: </b><%= @liquidacion.tipo_liquidacion %>
+</p>
+
+<p>
+  <b>Dias trabajados: </b><%= @liquidacion.dias_trabajados %>
+</p>
+
+<p>
+  <b>Planta: </b><%= AgenteCargo.find(@liquidacion.agente_cargo_id).nombre_completo %>
+</p>

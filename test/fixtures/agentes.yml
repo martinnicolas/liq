@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  dni: 1
+  apellido: MyString
+  nombre: MyString
+  cuit_cuil: MyString
+  fecha_ingreso: 2014-06-24
+  localidad_id: 1
+  escuela_id: 1
+
+two:
+  dni: 1
+  apellido: MyString
+  nombre: MyString
+  cuit_cuil: MyString
+  fecha_ingreso: 2014-06-24
+  localidad_id: 1
+  escuela_id: 1

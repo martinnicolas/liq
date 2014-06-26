@@ -1,0 +1,32 @@
+<%= form_for(@agente) do |f| %>
+  <% if @agente.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@agente.errors.count, "error") %> prohibited this agente from being saved:</h2>
+
+      <ul>
+      <% @agente.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="formulario">
+    <tr>
+      <th><%= f.label :dni, "DNI" %></th><td><%= f.text_field :dni, :style => "width: 100px;" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :apellido %></th><td><%= f.text_field :apellido, :style => "width: 200px;" %></td>
+    </tr>
+    <tr><th><%= f.label :nombre %></th><td><%= f.text_field :nombre, :style => "width: 350px;" %></td></tr>
+    <tr><th><%= f.label :cuit_cuil, "CUIT/CUIL" %></th><td><%= f.text_field :cuit_cuil, :style => "width: 350px;" %></td>
+    </tr>
+    <tr><th><%= f.label :fecha_ingreso, "Fecha de ingreso" %></th><td><%= f.datepicker :fecha_ingreso, :style => "width: 80px;" %></td>
+    </tr>
+    <tr><th><%= f.label :localidad_id, "Localidad" %></th><td><%= f.collection_select :localidad_id, Localidad.all, :id, :nombre %></td></tr>
+  </table> 
+
+  <div class="actions">
+    <%= f.submit :class => "btn btn-primary", :value => 'Guardar' %>
+  </div>  
+<% end %>
