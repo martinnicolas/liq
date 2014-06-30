@@ -1,1 +1,0 @@
-INSERT INTO `liq`.`establecimientos`(`numero`, `nombre`, `direccion`, `cue`, `localidad_id`) select escuela, nombre, direccion, cue, loc_ID from escuelas where escuela > 651;

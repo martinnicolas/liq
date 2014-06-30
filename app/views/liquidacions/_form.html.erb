@@ -27,9 +27,9 @@
     Marque todos los <b>conceptos</b> que desee incluir en la <b>liquidación</b>
   </div>  
 
-  <table class="formulario table table-striped" style="width:50%; ">
+  <table class="formulario table table-striped" style="width:50%;">
   <% @conceptos.each do |c| %>
-    <tr><th><%= label_tag c.nombre %></th>
+    <tr><th><%= label_tag c.nombre, c.nombre %></th>
       <td><%= check_box(c.nombre,c.requerido, :checked => c.activado_x_defecto == 'SI') %></td></tr>
   <% end %>
   </table>
