@@ -6,20 +6,20 @@
 
 <table class="table table-striped">
   <tr>
-    <th>Fecha</th>
     <th>Agente</th>
     <th>Cargo</th>
     <th>Establecimiento</th>
+    <th>Fecha de creación</th>
     <th>Estado</th>
     <th>&nbsp;</th>
   </tr>
 
 <% @agente_cargos.each do |agente_cargo| %>
   <tr>
-    <td><%= agente_cargo.fecha %></td>
     <td><%= Agente.find(agente_cargo.agente_id).apellido_y_nombre %></td>
     <td><%= Cargo.find(agente_cargo.cargo_id).nombre_completo %></td>
     <td><%= Establecimiento.find(agente_cargo.establecimiento_id).nombre_completo %></td>
+    <td><%= agente_cargo.fecha %></td>
     <td><%= agente_cargo.estado %></td>
     <td>
         <div class="btn-group">

@@ -14,13 +14,14 @@
 	    <div class="navbar">
     		<div class="navbar-inner">
           <ul class="nav">
-            <li><%= link_to "Inicio", index_path %></li>
-            <li><%= link_to "Liquidaciones", liquidacions_path %></li>
-            <li><%= link_to "Plantas", agente_cargos_path %></li>
-            <li><%= link_to "Agentes", agentes_path %></li>
-            <li><%= link_to "Cargos", cargos_path %></li>
-            <li><%= link_to "Conceptos", conceptos_path %></li>            
-            <li><%= link_to "Establecimientos", establecimientos_path %></li>            
+          <li class="<%= 'active' if params[:controller] == 'index' %>"><%= link_to "Inicio", index_path %>
+          </li>
+          <li class="<%= 'active' if params[:controller] == 'liquidacions' %>"><%= link_to "Liquidaciones", liquidacions_path %></li>
+          <li class="<%= 'active' if params[:controller] == 'agente_cargos' %>"><%= link_to "Plantas", agente_cargos_path %></li>
+          <li class="<%= 'active' if params[:controller] == 'agentes' %>"><%= link_to "Agentes", agentes_path %></li>
+          <li class="<%= 'active' if params[:controller] == 'cargos' %>"><%= link_to "Cargos", cargos_path %></li>
+          <li class="<%= 'active' if params[:controller] == 'conceptos' %>"><%= link_to "Conceptos", conceptos_path %></li>            
+          <li class="<%= 'active' if params[:controller] == 'establecimientos' %>"><%= link_to "Establecimientos", establecimientos_path %></li>            
           </ul>
         </div>    
     	</div>    

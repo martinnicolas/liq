@@ -9,6 +9,7 @@
     <th>Fecha</th>
     <th>Tipo de liquidación</th>
     <th>Planta</th>
+    <th>Días trabajados</th>
     <th>&nbsp;</th>
   </tr>
 
@@ -17,6 +18,7 @@
     <td><%= liquidacion.fecha %></td>
     <td><%= liquidacion.tipo_liquidacion %></td>
     <td><%= AgenteCargo.find(liquidacion.agente_cargo_id).nombre_completo %></td>
+    <td><%= liquidacion.dias_trabajados %></td>
     <td>
         <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span>

@@ -16,19 +16,21 @@
       <th><%= f.label :fecha %></th><td><%= f.datepicker :fecha, :style => "width: 80px;" %></td>
     </tr>
     <tr>
-      <th><%= f.label :tipo_liquidacion, "Tipo de liquidación" %></th><td><%= f.text_field :tipo_liquidacion, :style => "width: 200px;" %></td>
+      <th><%= f.label :tipo_liquidacion, "Tipo de liquidación" %></th>
+      <td><%= f.select :tipo_liquidacion, options_for_select(Liquidacion.tipos) %></td>
     </tr>
     <tr><th><%= f.label :agente_cargo_id, "Planta" %></th><td><%= f.collection_select :agente_cargo_id, AgenteCargo.all, :id, :nombre_completo %></td></tr>
-    <tr><th><%= f.label :dias_trabajados %></th><td><%= f.text_field :dias_trabajados, :style => "width: 50px;" %></td></tr>    
+    <tr><th><%= f.label :dias_trabajados, "Días trabajados" %></th><td><%= f.text_field :dias_trabajados, :style => "width: 50px;" %></td></tr>    
   </table> 
 
   <div class="alert alert-info"> 
     Marque todos los <b>conceptos</b> que desee incluir en la <b>liquidación</b>
   </div>  
 
-  <table class="formulario">
+  <table class="formulario table table-striped" style="width:50%; ">
   <% @conceptos.each do |c| %>
-    <tr><th><%= label_tag c.nombre %></th><td><%= check_box("value",c.requerido) %></td></tr>
+    <tr><th><%= label_tag c.nombre %></th>
+      <td><%= check_box(c.nombre,c.requerido, :checked => c.activado_x_defecto == 'SI') %></td></tr>
   <% end %>
   </table>
 

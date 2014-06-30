@@ -94,13 +94,4 @@ ActiveRecord::Schema.define(:version => 20140626154217) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "planta", :force => true do |t|
-    t.date     "fecha_creacion"
-    t.string   "estado"
-    t.integer  "cargo_id"
-    t.string   "descripcion"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
 end
