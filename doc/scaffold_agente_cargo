@@ -1,0 +1,1 @@
+rails g scaffold AgenteCargo agente_id:integer cargo_id:integer descripcion:string establecimiento_id:integer estado:string fecha_creacion:date cant_horas:integer secuencia:string

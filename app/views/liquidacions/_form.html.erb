@@ -29,8 +29,13 @@
 
   <table class="formulario table table-striped" style="width:50%;">
   <% @conceptos.each do |c| %>
+    <% if c.carga_manual == 'NO' %>
     <tr><th><%= label_tag c.nombre, c.nombre %></th>
       <td><%= check_box(c.nombre,c.requerido, :checked => c.activado_x_defecto == 'SI') %></td></tr>
+    <% else %>
+    <tr><th><%= label_tag c.nombre, c.nombre %></th>
+      <td><%= text_field(c.nombre,c.requerido) %></td></tr>
+    <% end %>
   <% end %>
   </table>
 

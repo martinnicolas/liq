@@ -9,8 +9,10 @@
     <th>Agente</th>
     <th>Cargo</th>
     <th>Establecimiento</th>
-    <th>Fecha de creación</th>
+    <th>Cant. horas</th>
     <th>Estado</th>
+    <th>Fecha de alta</th>
+    <th>Secuencia</th>
     <th>&nbsp;</th>
   </tr>
 
@@ -19,8 +21,10 @@
     <td><%= Agente.find(agente_cargo.agente_id).apellido_y_nombre %></td>
     <td><%= Cargo.find(agente_cargo.cargo_id).nombre_completo %></td>
     <td><%= Establecimiento.find(agente_cargo.establecimiento_id).nombre_completo %></td>
-    <td><%= agente_cargo.fecha %></td>
+    <td><%= agente_cargo.cant_horas %></td>
     <td><%= agente_cargo.estado %></td>
+    <td><%= agente_cargo.fecha_creacion %></td>
+    <td><%= agente_cargo.secuencia %></td>
     <td>
         <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span>
@@ -29,14 +33,9 @@
     <li><%= link_to 'Ver', agente_cargo %></li>
     <li><%= link_to 'Editar', edit_agente_cargo_path(agente_cargo) %></li>
     <li><%= link_to 'Eliminar', agente_cargo, method: :delete, data: { confirm: 'Está seguro de querer eliminar esta Planta?' } %></li>
-    <li class="divider"></li>
-    <li><%= link_to 'Ver agente', Agente.find(agente_cargo.agente_id) %></li>
-    <li><%= link_to 'Ver Establecimiento', Establecimiento.find(agente_cargo.establecimiento_id) %></li>
-    <li class="divider"></li>
-    <li><%= link_to 'Crear liquidacion', new_liquidacion_path %></li>
   </ul>
         </div>
-    </td>        
+    </td>    
   </tr>
 <% end %>
 </table>

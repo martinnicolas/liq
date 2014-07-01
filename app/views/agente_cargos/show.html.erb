@@ -6,18 +6,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Fecha: </b><%= @agente_cargo.fecha %>
-</p>
-
-<p>
-  <b>Estado: </b><%= @agente_cargo.estado %>
-</p>
-
-<p>
-  <b>Descripción: </b><%= @agente_cargo.descripcion %>
-</p>
-
-<p>
   <b>Agente: </b><%= Agente.find(@agente_cargo.agente_id).apellido_y_nombre %>
 </p>
 
@@ -26,5 +14,25 @@
 </p>
 
 <p>
+  <b>Descripcion: </b><%= @agente_cargo.descripcion %>
+</p>
+
+<p>
   <b>Establecimiento: </b><%= Establecimiento.find(@agente_cargo.establecimiento_id).nombre_completo %>
+</p>
+
+<p>
+  <b>Estado: </b><%= @agente_cargo.estado %>
+</p>
+
+<p>
+  <b>Fecha creacion: </b><%= @agente_cargo.fecha_creacion %>
+</p>
+
+<p>
+  <b>Cant horas: </b><%= @agente_cargo.cant_horas %>
+</p>
+
+<p>
+  <b>Secuencia: </b><%= @agente_cargo.secuencia %>
 </p>

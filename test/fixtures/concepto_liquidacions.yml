@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  liquidacion_id: 1
+  concepto_id: 1
+  formula_calculo: MyString
+  calculo: MyString
+  valor_calculado: 1.5
+
+two:
+  liquidacion_id: 1
+  concepto_id: 1
+  formula_calculo: MyString
+  calculo: MyString
+  valor_calculado: 1.5

@@ -1,9 +1,9 @@
 Liq::Application.routes.draw do
+  resources :agente_cargos
+
   resources :liquidacions
 
   resources :establecimientos
-
-  resources :agente_cargos
 
   resources :agentes
 

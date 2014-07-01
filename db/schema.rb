@@ -11,15 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140626154217) do
+ActiveRecord::Schema.define(:version => 20140701143145) do
 
   create_table "agente_cargos", :force => true do |t|
-    t.date     "fecha"
-    t.string   "estado"
-    t.string   "descripcion"
     t.integer  "agente_id"
     t.integer  "cargo_id"
+    t.string   "descripcion"
     t.integer  "establecimiento_id"
+    t.string   "estado"
+    t.date     "fecha_creacion"
+    t.integer  "cant_horas"
+    t.string   "secuencia"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
@@ -50,6 +52,16 @@ ActiveRecord::Schema.define(:version => 20140626154217) do
     t.string   "hstexto"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "concepto_liquidacions", :force => true do |t|
+    t.integer  "liquidacion_id"
+    t.integer  "concepto_id"
+    t.string   "formula_calculo"
+    t.string   "calculo"
+    t.float    "valor_calculado"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "conceptos", :force => true do |t|
