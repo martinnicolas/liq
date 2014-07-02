@@ -49,9 +49,20 @@ class LiquidacionsController < ApplicationController
     @liquidacion = Liquidacion.new(params[:liquidacion])
 
     #Levanto los conceptos seleccionados
-    @conceptos_seleccionados = params[:codigo_conceptos]
+    @conceptos_seleccionados = params[:codigos_seleccionados]
 
     #Creo el objeto ConceptoLiquidacion
+    #@concepto_liquidacion = ConceptoLiquidacion.new
+    #@conceptos_seleccionados.each do | concepto |
+    #  @concepto_liquidacion.liquidacion_id = Liquidacion.liquidacion_id
+    #  @concepto_liquidacion.concepto_id = concepto
+    #  @concepto.formula_calculo = ""
+    #  @concepto.calculo = ""
+    #  @concepto.valor_calculado = 0.0
+    #end
+    @conceptos_seleccionados.each do |conc|
+        conc.prints
+    end
 
     respond_to do |format|
       if @liquidacion.save

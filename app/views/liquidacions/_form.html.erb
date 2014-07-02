@@ -32,7 +32,7 @@
     <% if c.carga_manual == 'NO' %>
     <tr>
       <th><%= label_tag "codigo_concepto_#{c.codigo_concepto}", c.nombre %></th>
-      <td><%= check_box("codigo_concepto_#{c.codigo_concepto}" , c.codigo_concepto, :checked => c.activado_x_defecto == 'SI') %></td>
+      <td><%= check_box("codigo_concepto_#{c.codigo_concepto}", "codigos_seleccionados", {:multiple => true}, :checked => c.activado_x_defecto == 'SI') %></td>
     </tr>
     <% else %>
     <tr>
