@@ -12,18 +12,31 @@
   <% end %>
 
   <table class="formulario">
-    <tr><th><%= f.label :codigo, "Código" %></th><td><%= f.text_field :codigo, :style => "width: 100px;" %></td></tr>
-    <tr><th><%= f.label :nombre %></th><td><%= f.text_field :nombre, :style => "width: 300px;" %></td></tr>
-    <tr><th><%= f.label :calculo_cargos, "Cálculo de cargos" %></th><td><%= f.text_area :calculo_cargos, :cols => 40, :rows => 5 %></td></tr>
-    <tr><th><%= f.label :calculo_horas_media, "Cálculo de horas de media" %></th><td><%= f.text_area :calculo_horas_media, :cols => 40, :rows => 5 %></td></tr>
-    <tr><th><%= f.label :calculo_horas_superior, "Cálculo de horas de nivel superior" %></th><td><%= f.text_area :calculo_horas_superior, :cols => 40, :rows => 5 %></td></tr>
-    <tr><th><%= f.label :requerido %></th><td><%= f.text_field :requerido, :style => "width: 100px;" %></td></tr>
-    <tr><th><%= f.label :carga_manual %></th><td><%= f.text_field :carga_manual, :style => "width: 100px;" %></td></tr>
-    <tr><th><%= f.label :ayuda %></th><td><%= f.text_area :ayuda, :cols => 40, :rows => 5 %></td></tr>
-    <tr><th><%= f.label :activado_x_defecto, "Activado por defecto" %></th><td><%= f.text_field :activado_x_defecto, :style => "width: 100px;" %></td></tr>
-    <tr><th><%= f.label :tipo %></th><td><%= f.text_field :tipo, :style => "width: 150px;" %></td></tr>
-    <tr><th><%= f.label :tipo_liquidacion %></th><td><%= f.text_field :tipo_liquidacion, :style => "width: 150px;" %></td></tr>
-    </table> 
+    <tr>
+      <th><%= f.label :anhomes, "Año y mes" %></th><td><%= f.text_field :anhomes, :style => "width: 80px;" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :codigo_concepto, "Código" %></th><td><%= f.text_field :codigo_concepto, :style => "width: 100px;" %></td>
+    </tr>
+    <tr><th><%= f.label :nombre %></th><td><%= f.text_field :nombre %></td></tr>
+    <tr><th><%= f.label :calculo_auxiliares %></th><td><%= f.text_field :calculo_auxiliares, :style => "width: 350px;" %></td>
+    </tr>  
+    <tr><th><%= f.label :calculo_cargos %></th><td><%= f.text_field :calculo_cargos, :style => "width: 350px;" %></td>
+    </tr>    
+    <tr><th><%= f.label :calculo_horas_media %></th><td><%= f.text_field :calculo_horas_media, :style => "width: 350px;" %></td>
+    </tr>      
+    <tr><th><%= f.label :calculo_horas_superior %></th><td><%= f.text_field :calculo_horas_superior, :style => "width: 350px;" %></td>
+    </tr>      
+    <tr><th><%= f.label :orden %></th><td><%= f.text_field :orden %></td></tr>      
+    <tr><th><%= f.label :requerido %></th><td><%= f.text_field :requerido %></td></tr>      
+    <tr><th><%= f.label :carga_manual %></th><td><%= f.text_field :carga_manual %></td></tr>      
+    <tr><th><%= f.label :minimo %></th><td><%= f.text_field :minimo %></td></tr>      
+    <tr><th><%= f.label :maixmo %></th><td><%= f.text_field :maximo %></td></tr>      
+    <tr><th><%= f.label :ayuda %></th><td><%= f.text_field :ayuda %></td></tr>      
+    <tr><th><%= f.label :activado_x_defecto %></th><td><%= f.text_field :activado_x_defecto %></td></tr>
+    <tr><th><%= f.label :tipo %></th><td><%= f.text_field :tipo %></td></tr>            
+    <tr><th><%= f.label :tipo_liquidacion %></th><td><%= f.text_field :tipo_liquidacion %></td></tr>      
+  </table> 
 
   <div class="actions">
     <%= f.submit :class => "btn btn-primary", :value => 'Guardar' %>

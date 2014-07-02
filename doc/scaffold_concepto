@@ -1,2 +1,1 @@
-rails g scaffold Concepto codigo:string nombre:string calculo_cargos:string calculo_horas_media:string calculo_horas_superior:string requerido:string carga_manual:string ayuda:string 
-activado_x_defecto:string tipo:string   
+rails g scaffold Concepto anhomes:integer codigo_concepto:integer nombre:string calculo_auxiliares:string calculo_cargos:string calculo_horas_media:string calculo_horas_superior:string orden:integer requerido:string carga_manual:string minimo:float maximo:float ayuda:string activado_x_defecto:string tipo:string tipo_liquidacion:string

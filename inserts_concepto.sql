@@ -319,3 +319,4 @@ VALUES (84,1,'PORCENTAJE ANTIGUEDAD','porcentaje_antiguedad','porcentaje_antigue
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 
 -- End of script
+

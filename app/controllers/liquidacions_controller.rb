@@ -28,7 +28,7 @@ class LiquidacionsController < ApplicationController
 
 
     #Levanto de conceptos, todos los conceptos que son requeridos para liquidacion de auxiliares
-    @conceptos = Concepto.where(:tipo_liquidacion => 'DOCENTE', :requerido => 'SI')    
+    @conceptos = Concepto.where(:tipo_liquidacion => 'AUXILIAR', :requerido => 'SI')    
 
     respond_to do |format|
       format.html # new.html.erb

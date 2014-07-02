@@ -1,4 +1,6 @@
 Liq::Application.routes.draw do
+  resources :conceptos
+
   resources :agente_cargos
 
   resources :liquidacions
@@ -6,8 +8,6 @@ Liq::Application.routes.draw do
   resources :establecimientos
 
   resources :agentes
-
-  resources :conceptos
 
   resources :cargos
 

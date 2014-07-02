@@ -1,1 +1,1 @@
-rails g model ConceptoLiquidacion liquidacion_id:integer concepto_id:integer formula_calculo:string calculo:string valor_calculado:floatscaffold_concepto_liquidacion
+rails g model ConceptoLiquidacion liquidacion_id:integer concepto_id:integer formula_calculo:string calculo:string valor_calculado:float
