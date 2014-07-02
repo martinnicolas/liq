@@ -15,6 +15,9 @@ class LiquidacionsController < ApplicationController
   def show
     @liquidacion = Liquidacion.find(params[:id])
 
+    #Obtengo todos los conceptos de la liquidacion
+    @concepto_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => @liquidacion.id)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @liquidacion }
@@ -26,8 +29,7 @@ class LiquidacionsController < ApplicationController
   def new
     @liquidacion = Liquidacion.new
 
-
-    #Levanto de conceptos, todos los conceptos que son requeridos para liquidacion de auxiliares
+    #Levanto de conceptos, todos los conceptos que son requeridos para liquidacion de auxiliares    
     @conceptos = Concepto.where(:tipo_liquidacion => 'AUXILIAR', :requerido => 'SI')    
 
     respond_to do |format|
@@ -45,6 +47,11 @@ class LiquidacionsController < ApplicationController
   # POST /liquidacions.json
   def create
     @liquidacion = Liquidacion.new(params[:liquidacion])
+
+    #Levanto los conceptos seleccionados
+    @conceptos_seleccionados = params[:codigo_conceptos]
+
+    #Creo el objeto ConceptoLiquidacion
 
     respond_to do |format|
       if @liquidacion.save

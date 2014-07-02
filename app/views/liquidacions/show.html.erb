@@ -20,3 +20,16 @@
 <p>
   <b>Planta: </b><%= AgenteCargo.find(@liquidacion.agente_cargo_id).nombre_completo %>
 </p>
+
+<div class="alert alert-info"> 
+    Marque todos los <b>conceptos</b> que desee incluir en la <b>liquidación</b>
+</div>  
+
+<table class="formulario table table-striped" style="width:50%;">
+  <% @concepto_liquidacion.each do |c| %>
+    <tr>
+    	<th><%=  Concepto.find(c.agente_id).nombre_completo %></th>
+      	<td><%=  c.valor_calculado %></td>
+    </tr>    
+  <% end %>
+</table>
