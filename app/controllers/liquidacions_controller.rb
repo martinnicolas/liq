@@ -40,7 +40,13 @@ class LiquidacionsController < ApplicationController
 
   # GET /liquidacions/1/edit
   def edit
+    
+    #Levanto de conceptos, todos los conceptos que son requeridos para liquidacion de auxiliares    
+    @conceptos = Concepto.where(:tipo_liquidacion => 'AUXILIAR', :requerido => 'SI')    
+
     @liquidacion = Liquidacion.find(params[:id])
+    @conceptos_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => @liquidacion_id)
+
   end
 
   # POST /liquidacions
@@ -48,22 +54,23 @@ class LiquidacionsController < ApplicationController
   def create
     @liquidacion = Liquidacion.new(params[:liquidacion])
 
-    #Levanto los conceptos seleccionados
-    @conceptos_seleccionados = params[:codigos][:seleccionados]
-
-    #Creo el objeto ConceptoLiquidacion    
-    @conceptos_seleccionados.each do | concepto_id |
-      @concepto_liquidacion = ConceptoLiquidacion.new
-      @concepto_liquidacion.liquidacion_id = @liquidacion
-      @concepto_liquidacion.concepto_id = concepto_id
-      @concepto_liquidacion.formula_calculo = "formula completa"
-      @concepto_liquidacion.calculo = "formula solo con numeros"
-      @concepto_liquidacion.valor_calculado = 0.0
-      @concepto_liquidacion.save
-    end    
-
     respond_to do |format|
       if @liquidacion.save
+        
+        #Levanto los conceptos seleccionados
+        @conceptos_seleccionados = params[:codigos][:seleccionados]
+
+        #Creo el objeto ConceptoLiquidacion    
+        @conceptos_seleccionados.each do | concepto_id |
+          @concepto_liquidacion = ConceptoLiquidacion.new
+          @concepto_liquidacion.liquidacion_id = @liquidacion.id
+          @concepto_liquidacion.concepto_id = concepto_id
+          @concepto_liquidacion.formula_calculo = "formula completa"
+          @concepto_liquidacion.calculo = "formula solo con numeros"
+          @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_auxiliares
+          @concepto_liquidacion.save
+        end    
+
         format.html { redirect_to @liquidacion, notice: 'Se ha creado una nueva liquidacion' }
         format.json { render json: @liquidacion, status: :created, location: @liquidacion }
       else
@@ -93,8 +100,12 @@ class LiquidacionsController < ApplicationController
   # DELETE /liquidacions/1.json
   def destroy
     @liquidacion = Liquidacion.find(params[:id])
-    @liquidacion.destroy
+    @conceptos_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => @liquidacion.id)
+    @conceptos_liquidacion.each do |concepto|
+      concepto.destroy
+    end
 
+    @liquidacion.destroy
     respond_to do |format|
       format.html { redirect_to liquidacions_url }
       format.json { head :no_content }

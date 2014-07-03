@@ -23,7 +23,7 @@
     <tr><th><%= f.label :dias_trabajados, "Días trabajados" %></th><td><%= f.text_field :dias_trabajados, :style => "width: 50px;" %></td></tr>    
   </table> 
 
-  <div class="alert alert-info"> 
+  <div class="alert alert-info" style="width:50%;"> 
     Marque todos los <b>conceptos</b> que desee incluir en la <b>liquidación</b>
   </div>  
 
@@ -38,8 +38,8 @@
     </tr>
     <% else %>
     <tr>
-      <th><%= label "codigos_seleccionados", c.nombre %></th>
-      <td><%= text_field("codigos_selececionados",c.codigo_concepto) %></td>
+      <th><%= label_tag "codigos_seleccionados_#{c.id}", c.nombre %></th>
+      <td><%= text_field("codigos_seleccionados_",c.id) %></td>
     </tr>
     <% end %>
   <% end %>

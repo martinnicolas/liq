@@ -6,29 +6,48 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Fecha:</b><%= @liquidacion.fecha %>
-</p>
-
-<p>
+  <b>Fecha: </b><%= @liquidacion.fecha %>
   <b>Tipo de liquidacion: </b><%= @liquidacion.tipo_liquidacion %>
 </p>
-
 <p>
-  <b>Dias trabajados: </b><%= @liquidacion.dias_trabajados %>
+  <b>Agente: </b><%= Agente.find(AgenteCargo.find(@liquidacion.agente_cargo_id).agente_id).apellido_y_nombre %> 
+  <b>DNI: </b><%= Agente.find(AgenteCargo.find(@liquidacion.agente_cargo_id).agente_id).dni %> 
+</p>
+<p>
+  <b>Planta: </b><%= AgenteCargo.find(@liquidacion.agente_cargo_id).nombre %>
+</p>
+<p>
+  <b>Secuencia: </b><%= AgenteCargo.find(@liquidacion.agente_cargo_id).secuencia %>
+</p>
+<p>
+  <b>Horas cátedra: </b><%= AgenteCargo.find(@liquidacion.agente_cargo_id).cant_horas %>
+</p>
+<p>
+  <b>Días trabajados: </b><%= @liquidacion.dias_trabajados %>
 </p>
 
-<p>
-  <b>Planta: </b><%= AgenteCargo.find(@liquidacion.agente_cargo_id).nombre_completo %>
-</p>
-
-<div class="alert alert-info"> 
-    <b>CONCEPTOS</b>
+<div class="alert alert-info" style="text-align:center;"> 
+    <b>DETALLE RECIBO</b>
 </div>  
 
-<table class="formulario table table-striped" style="width:50%;">
-  <% @concepto_liquidacion.each do |c| %>
+<table class="formulario table table-striped">
+  <tr>
+      <th>Código</th>
+      <th>Concepto</th>
+      <th>Importe</th>
+    </tr>    
+  <% @concepto_liquidacion.each do |c| %>    
     <tr>
-    	<th><%=  Concepto.find(c.concepto_id).nombre %></th><td><%=  c.valor_calculado %></td>
+      <td><%=  Concepto.find(c.concepto_id).codigo_concepto %></td>
+      <td><%=  Concepto.find(c.concepto_id).nombre %></td>
+      <td style="text-align: right;"><%=  number_with_precision(c.valor_calculado,:precision => 2) %></td>
     </tr>    
   <% end %>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td style="text-align: right;">
+        <%= number_with_precision(@concepto_liquidacion.sum(:valor_calculado),:precision => 2) %>
+      </td>
+    </tr> 
 </table>

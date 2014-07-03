@@ -8,7 +8,9 @@
   <tr>
     <th>Fecha</th>
     <th>Tipo de liquidación</th>
+    <th>Agente</th>
     <th>Planta</th>
+    <th>Oficina</th>
     <th>Días trabajados</th>
     <th>&nbsp;</th>
   </tr>
@@ -17,7 +19,9 @@
   <tr>
     <td><%= liquidacion.fecha %></td>
     <td><%= liquidacion.tipo_liquidacion %></td>
-    <td><%= AgenteCargo.find(liquidacion.agente_cargo_id).nombre_completo %></td>
+    <td><%= Agente.find(AgenteCargo.find(liquidacion.agente_cargo_id).agente_id).apellido_y_nombre %></td>
+    <td><%= AgenteCargo.find(liquidacion.agente_cargo_id).nombre %></td>
+    <td><%= Establecimiento.find(AgenteCargo.find(liquidacion.agente_cargo_id).establecimiento_id).numero %></td>
     <td><%= liquidacion.dias_trabajados %></td>
     <td>
         <div class="btn-group">
