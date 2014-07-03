@@ -33,7 +33,13 @@
     <tr>
       <th><%= label_tag "codigos_seleccionados_#{c.id}", c.nombre %></th>
       <td>
-      <%= check_box("codigos", "seleccionados", { :multiple => true }, c.id, nil) %>
+      <% 
+        checked = false      
+        if c.activado_x_defecto == 'SI'
+          checked = true
+        end
+      %>  
+      <%= check_box("codigos", "seleccionados", { :multiple => true, :checked => checked }, c.id, nil) %>
       </td>
     </tr>
     <% else %>
