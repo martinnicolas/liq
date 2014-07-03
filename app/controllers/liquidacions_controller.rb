@@ -49,24 +49,22 @@ class LiquidacionsController < ApplicationController
     @liquidacion = Liquidacion.new(params[:liquidacion])
 
     #Levanto los conceptos seleccionados
-    @conceptos_seleccionados = params[:codigos_seleccionados]
+    @conceptos_seleccionados = params[:codigos][:seleccionados]
 
-    #Creo el objeto ConceptoLiquidacion
-    #@concepto_liquidacion = ConceptoLiquidacion.new
-    #@conceptos_seleccionados.each do | concepto |
-    #  @concepto_liquidacion.liquidacion_id = Liquidacion.liquidacion_id
-    #  @concepto_liquidacion.concepto_id = concepto
-    #  @concepto.formula_calculo = ""
-    #  @concepto.calculo = ""
-    #  @concepto.valor_calculado = 0.0
-    #end
-    @conceptos_seleccionados.each do |conc|
-        conc.prints
-    end
+    #Creo el objeto ConceptoLiquidacion    
+    @conceptos_seleccionados.each do | concepto_id |
+      @concepto_liquidacion = ConceptoLiquidacion.new
+      @concepto_liquidacion.liquidacion_id = @liquidacion
+      @concepto_liquidacion.concepto_id = concepto_id
+      @concepto_liquidacion.formula_calculo = "formula completa"
+      @concepto_liquidacion.calculo = "formula solo con numeros"
+      @concepto_liquidacion.valor_calculado = 0.0
+      @concepto_liquidacion.save
+    end    
 
     respond_to do |format|
       if @liquidacion.save
-        format.html { redirect_to @liquidacion, notice: 'Liquidacion was successfully created.' }
+        format.html { redirect_to @liquidacion, notice: 'Se ha creado una nueva liquidacion' }
         format.json { render json: @liquidacion, status: :created, location: @liquidacion }
       else
         format.html { render action: "new" }
