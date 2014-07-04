@@ -8,4 +8,12 @@ class AgenteCargo < ActiveRecord::Base
   def nombre_completo
   	Agente.find(self.agente_id).apellido_y_nombre + ' - '+ Cargo.find(self.cargo_id).nombre_completo + ' ' + Establecimiento.find(establecimiento_id).nombre_completo + ' - ' +self.cant_horas.to_s + ' Hs.'
   end
+
+  def self.estados
+  	["ALT","BAJ","LIC"]
+  end
+
+  def self.tipos_cargos
+  	["CARGO (DOCENTE)","HORAS","CARGO (AUXILIAR)"]
+  end
 end

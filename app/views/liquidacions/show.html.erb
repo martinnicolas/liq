@@ -11,7 +11,7 @@
 
 <p>
   <b>Fecha: </b><%= @liquidacion.fecha %>
-  <b>Tipo de liquidacion: </b><%= @liquidacion.tipo_liquidacion %>
+  <b>Tipo de liquidación: </b><%= @liquidacion.tipo_liquidacion %>
 </p>
 <p>
   <b>Agente: </b><%= Agente.find(AgenteCargo.find(@liquidacion.agente_cargo_id).agente_id).apellido_y_nombre %> 

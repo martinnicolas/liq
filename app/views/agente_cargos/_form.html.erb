@@ -13,14 +13,20 @@
 
   <table class="formulario">
     <tr><th><%= f.label :agente_id, "Agente" %></th><td><%= f.collection_select :agente_id, Agente.all, :id, :apellido_y_nombre %></td></tr>
+<!-- <tr>
+      <th><%= label "tipo_cargo", "Tipo de cargo" %></th>
+      <td><%= select "tipo_cargo", "tipo_cargo", options_for_select(AgenteCargo.tipos_cargos) %></td>
+    </tr> -->
     <tr>
     <tr><th><%= f.label :cargo_id, "Cargo" %></th><td><%= f.collection_select :cargo_id, Cargo.all, :id, :nombre_completo %></td></tr>
     <tr>
     <tr><th><%= f.label :descripcion, "Descripción" %></th><td><%= f.text_field :descripcion, :style => "width: 350px;" %></td>
     </tr>
-    <tr><th><%= f.label :establecimiento_id, "Establecimiento" %></th><td><%= f.collection_select :establecimiento_id, Establecimiento.all, :id, :nombre_completo %></td></tr>
-    <tr><th><%= f.label :estado %></th><td><%= f.text_field :estado, :style => "width: 80px;" %></td>
-    </tr>        
+    <tr><th><%= f.label :establecimiento_id, "Establecimiento" %></th><td><%= f.collection_select :establecimiento_id, Establecimiento.all, :id, :nombre_completo %></td></tr>    
+    <tr>
+      <th><%= f.label :estado %></th>
+      <td><%= f.select :estado, options_for_select(AgenteCargo.estados) %></td>
+    </tr>
     <tr><th><%= f.label :fecha_creacion, "Fecha de alta" %></th><td><%= f.datepicker :fecha_creacion, :style => "width: 80px;" %></td></tr>
     <tr><th><%= f.label :cant_horas, "Cantidad de horas" %></th><td><%= f.text_field :cant_horas, :style => "width: 50px" %> <span class="alert alert-info"> Sólo para horas cátedras</span><td></tr>
     <tr><th><%= f.label :secuencia %></th><td><%= f.text_field :secuencia, :style => "width: 50px" %>

@@ -19,13 +19,13 @@
       <th><%= f.label :codigo_concepto, "Código" %></th><td><%= f.text_field :codigo_concepto, :style => "width: 100px;" %></td>
     </tr>
     <tr><th><%= f.label :nombre %></th><td><%= f.text_field :nombre %></td></tr>
-    <tr><th><%= f.label :calculo_auxiliares %></th><td><%= f.text_field :calculo_auxiliares, :style => "width: 350px;" %></td>
+    <tr><th><%= f.label :calculo_auxiliares %></th><td><%= f.text_area :calculo_auxiliares, :cols => "30", :rows => "5" %></td>
     </tr>  
-    <tr><th><%= f.label :calculo_cargos %></th><td><%= f.text_field :calculo_cargos, :style => "width: 350px;" %></td>
+    <tr><th><%= f.label :calculo_cargos %></th><td><%= f.text_area :calculo_cargos, :cols => "30", :rows => "5" %></td>
     </tr>    
-    <tr><th><%= f.label :calculo_horas_media %></th><td><%= f.text_field :calculo_horas_media, :style => "width: 350px;" %></td>
+    <tr><th><%= f.label :calculo_horas_media %></th><td><%= f.text_area :calculo_horas_media, :cols => "30", :rows => "5" %></td>
     </tr>      
-    <tr><th><%= f.label :calculo_horas_superior %></th><td><%= f.text_field :calculo_horas_superior, :style => "width: 350px;" %></td>
+    <tr><th><%= f.label :calculo_horas_superior %></th><td><%= f.text_area :calculo_horas_superior, :cols => "30", :rows => "5" %></td>
     </tr>      
     <tr><th><%= f.label :orden %></th><td><%= f.text_field :orden %></td></tr>      
     <tr><th><%= f.label :requerido %></th><td><%= f.text_field :requerido %></td></tr>      
