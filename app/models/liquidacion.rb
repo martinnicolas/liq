@@ -5,6 +5,6 @@ class Liquidacion < ActiveRecord::Base
   has_many :conceptos, :through => :concepto_liquidacions
 
   def self.tipos
-  	["NORMAL","SAC","COMPLEMENTARIA","PROGRAMATICA"]
+  	["COMPLEMENTARIA","PROGRAMATICA"]
   end
 end

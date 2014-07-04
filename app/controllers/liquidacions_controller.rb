@@ -44,8 +44,9 @@ class LiquidacionsController < ApplicationController
     #Levanto de conceptos, todos los conceptos que son requeridos para liquidacion de auxiliares    
     @conceptos = Concepto.where(:tipo_liquidacion => 'AUXILIAR', :requerido => 'SI')    
 
+    #Levanto todos los conceptos incluidos en la liquidacion que se va a editar
     @liquidacion = Liquidacion.find(params[:id])
-    @conceptos_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => @liquidacion_id)
+    @conceptos_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => @liquidacion.id).pluck(:concepto_id)
 
   end
 
@@ -85,6 +86,26 @@ class LiquidacionsController < ApplicationController
   def update
     @liquidacion = Liquidacion.find(params[:id])
 
+    #Elimino todos los conceptos incluidos en la liquidacion
+    @conceptos_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => @liquidacion.id)
+    @conceptos_liquidacion.each do |concepto|
+      concepto.destroy
+    end
+
+    #Levanto los conceptos seleccionados
+    @conceptos_seleccionados = params[:codigos][:seleccionados]
+
+    #Creo el objeto ConceptoLiquidacion    
+    @conceptos_seleccionados.each do | concepto_id |
+      @concepto_liquidacion = ConceptoLiquidacion.new
+      @concepto_liquidacion.liquidacion_id = @liquidacion.id
+      @concepto_liquidacion.concepto_id = concepto_id
+      @concepto_liquidacion.formula_calculo = "formula completa"
+      @concepto_liquidacion.calculo = "formula solo con numeros"
+      @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_auxiliares
+      @concepto_liquidacion.save
+    end    
+
     respond_to do |format|
       if @liquidacion.update_attributes(params[:liquidacion])
         format.html { redirect_to @liquidacion, notice: 'Liquidacion was successfully updated.' }
@@ -100,6 +121,8 @@ class LiquidacionsController < ApplicationController
   # DELETE /liquidacions/1.json
   def destroy
     @liquidacion = Liquidacion.find(params[:id])
+
+    #Elimino todos los conceptos incluidos en la liquidacion
     @conceptos_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => @liquidacion.id)
     @conceptos_liquidacion.each do |concepto|
       concepto.destroy

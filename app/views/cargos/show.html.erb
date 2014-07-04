@@ -3,7 +3,11 @@
   <li><%= link_to 'Editar', edit_cargo_path(@cargo) %></li> 
 </ul>
 
-<p id="notice"><%= notice %></p>
+<% if notice != nil %>
+<div class="alert alert-success"> 
+    <p id="notice"><%= notice %></p>
+</div>  
+<% end %>
 
 <p>
   <b>Categoría: </b> <%= @cargo.categoria %>

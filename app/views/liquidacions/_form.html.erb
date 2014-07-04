@@ -27,27 +27,37 @@
     Marque todos los <b>conceptos</b> que desee incluir en la <b>liquidación</b>
   </div>  
 
-  <table class="formulario table table-striped" style="width:50%;">
+  <table class="table table-striped" style="width:50%;">
+    <tr>
+      <th>Código</th>
+      <th>Concepto</th>
+      <th>&nbsp;</th>
+    <tr>  
   <% @conceptos.each do |c| %>  
-    <% if c.carga_manual == 'NO' %>
     <tr>
-      <th><%= label_tag "codigos_seleccionados_#{c.id}", c.nombre %></th>
-      <td>
-      <% 
-        checked = false      
-        if c.activado_x_defecto == 'SI'
-          checked = true
+      <td><%= c.codigo_concepto.to_s %></td>
+      <% if c.carga_manual == 'NO' %>          
+        <td><%= label_tag "codigos_seleccionados_#{c.id}", c.nombre %></td>
+        <td>
+        <% 
+        checked = false  
+        if @conceptos_liquidacion == nil
+          if (c.activado_x_defecto == 'SI') 
+            checked = true
+          end
+        else
+          if @conceptos_liquidacion.include?(c.id)
+            checked = true
+          end
         end
-      %>  
-      <%= check_box("codigos", "seleccionados", { :multiple => true, :checked => checked }, c.id, nil) %>
-      </td>
-    </tr>
+        %>  
+        <%= check_box("codigos", "seleccionados", { :multiple => true, :checked => checked }, c.id, nil) %>
+        </td>
     <% else %>
-    <tr>
-      <th><%= label_tag "codigos_seleccionados_#{c.id}", c.nombre %></th>
-      <td><%= text_field("codigos_seleccionados_",c.id) %></td>
-    </tr>
+     <td><%= label_tag "codigos_seleccionados_#{c.id}", c.nombre %></td>
+    <td><%= text_field("codigos_seleccionados_",c.id, :value => number_with_precision(0.00, :precision => 2)) %></td>   
     <% end %>
+    </tr>
   <% end %>
   </table>
 

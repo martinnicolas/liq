@@ -3,7 +3,11 @@
   <li><%= link_to 'Editar', edit_concepto_path(@concepto) %></li> 
 </ul>
 
-<p id="notice"><%= notice %></p>
+<% if notice != nil %>
+<div class="alert alert-success"> 
+    <p id="notice"><%= notice %></p>
+</div>  
+<% end %>
 
 <p>
   <b>Anhomes: </b><%= @concepto.anhomes %>

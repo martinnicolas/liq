@@ -3,7 +3,11 @@
   <li><%= link_to 'Editar', edit_agente_cargo_path(@agente_cargo) %></li> 
 </ul>
 
-<p id="notice"><%= notice %></p>
+<% if notice != nil %>
+<div class="alert alert-success"> 
+    <p id="notice"><%= notice %></p>
+</div>  
+<% end %>
 
 <p>
   <b>Agente: </b><%= Agente.find(@agente_cargo.agente_id).apellido_y_nombre %>
