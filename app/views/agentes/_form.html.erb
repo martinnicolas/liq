@@ -21,7 +21,8 @@
     <tr><th><%= f.label :nombre %></th><td><%= f.text_field :nombre, :style => "width: 350px;" %></td></tr>
     <tr><th><%= f.label :cuit_cuil, "CUIT/CUIL" %></th><td><%= f.text_field :cuit_cuil, :style => "width: 350px;" %></td>
     </tr>
-    <tr><th><%= f.label :fecha_ingreso, "Fecha de ingreso" %></th><td><%= f.datepicker :fecha_ingreso, :style => "width: 80px;" %></td>
+    <tr><th><%= f.label :fecha_ingreso, "Fecha de ingreso" %></th>
+      <td><%= f.datepicker :fecha_ingreso, :style => "width: 80px;" %></td>
     </tr>
     <tr><th><%= f.label :localidad_id, "Localidad" %></th><td><%= f.collection_select :localidad_id, Localidad.all, :id, :nombre %></td></tr>
   </table> 

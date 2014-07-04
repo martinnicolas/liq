@@ -28,12 +28,26 @@
     <tr><th><%= f.label :calculo_horas_superior %></th><td><%= f.text_area :calculo_horas_superior, :cols => "30", :rows => "5" %></td>
     </tr>      
     <tr><th><%= f.label :orden %></th><td><%= f.text_field :orden %></td></tr>      
-    <tr><th><%= f.label :requerido %></th><td><%= f.text_field :requerido %></td></tr>      
+    <tr><th><%= f.label :requerido %></th>
+    <td>
+        <%= f.label :requerido, 'SI'%>
+        <%= f.radio_button :requerido, 'SI' %>
+        <%= f.label :requerido, 'NO' %>
+        <%= f.radio_button :requerido, 'NO' %>
+    </td>
     <tr><th><%= f.label :carga_manual %></th><td><%= f.text_field :carga_manual %></td></tr>      
-    <tr><th><%= f.label :minimo %></th><td><%= f.text_field :minimo %></td></tr>      
-    <tr><th><%= f.label :maixmo %></th><td><%= f.text_field :maximo %></td></tr>      
+    <tr><th><%= f.label :minimo, "Mínimo" %></th><td><%= f.text_field :minimo, :style => "width: 80px;" %></td></tr>      
+    <tr><th><%= f.label :maixmo, "Máximo" %></th><td><%= f.text_field :maximo, :style => "width: 80px;" %></td></tr>      
     <tr><th><%= f.label :ayuda %></th><td><%= f.text_field :ayuda %></td></tr>      
-    <tr><th><%= f.label :activado_x_defecto %></th><td><%= f.text_field :activado_x_defecto %></td></tr>
+    <tr>
+      <th><%= f.label :activado_x_defecto, "Activado por defecto" %></th>
+      <td>
+        <%= f.label :activado_x_defecto, 'SI'%>
+        <%= f.radio_button :activado_x_defecto, 'SI' %>
+        <%= f.label :activado_x_defecto, 'NO' %>
+        <%= f.radio_button :activado_x_defecto, 'NO' %>
+      </td>
+    </tr>    
     <tr><th><%= f.label :tipo %></th><td><%= f.text_field :tipo %></td></tr>            
     <tr><th><%= f.label :tipo_liquidacion %></th><td><%= f.text_field :tipo_liquidacion %></td></tr>      
   </table> 
