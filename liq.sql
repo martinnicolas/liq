@@ -56,7 +56,7 @@ CREATE TABLE `liquidacions` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `liquidacions` (
 
 LOCK TABLES `liquidacions` WRITE;
 /*!40000 ALTER TABLE `liquidacions` DISABLE KEYS */;
-INSERT INTO `liquidacions` VALUES (6,'2014-07-02','COMPLEMENTARIA',30,2,'2014-07-03 12:59:21','2014-07-07 11:54:34');
+INSERT INTO `liquidacions` VALUES (6,'2014-07-02','COMPLEMENTARIA',30,2,'2014-07-03 12:59:21','2014-07-07 11:54:34'),(7,'2014-07-03','COMPLEMENTARIA',20,1,'2014-07-07 13:01:10','2014-07-07 13:01:10');
 /*!40000 ALTER TABLE `liquidacions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,7 +113,7 @@ CREATE TABLE `concepto_liquidacions` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +122,7 @@ CREATE TABLE `concepto_liquidacions` (
 
 LOCK TABLES `concepto_liquidacions` WRITE;
 /*!40000 ALTER TABLE `concepto_liquidacions` DISABLE KEYS */;
-INSERT INTO `concepto_liquidacions` VALUES (28,6,49,'formula completa','formula solo con numeros',764.95,'2014-07-07 12:06:49','2014-07-07 12:06:49'),(29,6,69,'formula completa','formula solo con numeros',-765.12,'2014-07-07 12:06:49','2014-07-07 12:06:49'),(30,6,70,'formula completa','formula solo con numeros',-218.6,'2014-07-07 12:06:49','2014-07-07 12:06:49'),(31,6,151,'formula completa','formula solo con numeros',-0.39,'2014-07-07 12:06:49','2014-07-07 12:06:49'),(32,6,234,'formula completa','formula solo con numeros',4700.16,'2014-07-07 12:06:49','2014-07-07 12:06:49'),(33,6,238,'formula completa','formula solo con numeros',1300,'2014-07-07 12:06:49','2014-07-07 12:06:49'),(34,6,244,'formula completa','formula solo con numeros',-10,'2014-07-07 12:06:49','2014-07-07 12:06:49');
+INSERT INTO `concepto_liquidacions` VALUES (49,6,49,'formula completa','formula solo con numeros',764.95,'2014-07-07 13:00:35','2014-07-07 13:00:35'),(50,6,69,'formula completa','formula solo con numeros',-765.12,'2014-07-07 13:00:35','2014-07-07 13:00:35'),(51,6,70,'formula completa','formula solo con numeros',-218.6,'2014-07-07 13:00:35','2014-07-07 13:00:35'),(52,6,151,'formula completa','formula solo con numeros',-0.39,'2014-07-07 13:00:35','2014-07-07 13:00:35'),(53,6,234,'formula completa','formula solo con numeros',4700.16,'2014-07-07 13:00:35','2014-07-07 13:00:35'),(54,6,238,'formula completa','formula solo con numeros',1300,'2014-07-07 13:00:35','2014-07-07 13:00:35'),(55,6,244,'formula completa','formula solo con numeros',-10,'2014-07-07 13:00:35','2014-07-07 13:00:35'),(56,7,35,'formula completa','formula solo con numeros',NULL,'2014-07-07 13:01:10','2014-07-07 13:01:10'),(57,7,37,'formula completa','formula solo con numeros',NULL,'2014-07-07 13:01:10','2014-07-07 13:01:10'),(58,7,38,'formula completa','formula solo con numeros',NULL,'2014-07-07 13:01:10','2014-07-07 13:01:10');
 /*!40000 ALTER TABLE `concepto_liquidacions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,7 +295,7 @@ CREATE TABLE `agente_cargos` (
 
 LOCK TABLES `agente_cargos` WRITE;
 /*!40000 ALTER TABLE `agente_cargos` DISABLE KEYS */;
-INSERT INTO `agente_cargos` VALUES (1,3,279,'HORAS','HORAS DE MEDIA','',1057,'ALT','2014-07-06',20,'001','2014-07-07 00:23:57','2014-07-07 00:23:57'),(2,5,669,'CARGO (AUXILIAR)','','',1298,'ALT','2014-07-01',NULL,'','2014-07-07 00:28:26','2014-07-07 11:52:59');
+INSERT INTO `agente_cargos` VALUES (1,3,279,'H','M','',1057,'ALT','2014-07-06',20,'001','2014-07-07 00:23:57','2014-07-07 13:03:24'),(2,5,669,'A','','',1298,'ALT','2014-07-01',NULL,'','2014-07-07 00:28:26','2014-07-07 13:03:44');
 /*!40000 ALTER TABLE `agente_cargos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -316,4 +316,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-07  9:09:45
+-- Dump completed on 2014-07-07 10:07:22
