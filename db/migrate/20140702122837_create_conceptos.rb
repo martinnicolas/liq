@@ -16,7 +16,6 @@ class CreateConceptos < ActiveRecord::Migration
       t.string :ayuda
       t.string :activado_x_defecto
       t.string :tipo
-      t.string :tipo_liquidacion
 
       t.timestamps
     end

@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(:version => 20140702122837) do
     t.string   "ayuda"
     t.string   "activado_x_defecto"
     t.string   "tipo"
-    t.string   "tipo_liquidacion"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
   end
