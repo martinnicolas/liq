@@ -1,5 +1,5 @@
 class AgenteCargo < ActiveRecord::Base
-  attr_accessible :agente_id, :cant_horas, :cargo_id, :descripcion, :establecimiento_id, :estado, :fecha_creacion, :secuencia
+  attr_accessible :agente_id, :cant_horas, :cargo_id, :tipo_cargo, :tipo_horas, :descripcion, :establecimiento_id, :estado, :fecha_creacion, :secuencia
 
   def nombre
   	Cargo.find(self.cargo_id).nombre_completo
@@ -15,5 +15,9 @@ class AgenteCargo < ActiveRecord::Base
 
   def self.tipos_cargos
   	["CARGO (DOCENTE)","HORAS","CARGO (AUXILIAR)"]
+  end
+
+  def self.tipos_horas
+    ["HORAS DE MEDIA","HORAS DE SUPERIOR"]
   end
 end

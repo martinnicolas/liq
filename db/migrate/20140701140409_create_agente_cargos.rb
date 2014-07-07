@@ -3,6 +3,8 @@ class CreateAgenteCargos < ActiveRecord::Migration
     create_table :agente_cargos do |t|
       t.integer :agente_id
       t.integer :cargo_id
+      t.string :tipo_cargo
+      t.string :tipo_horas
       t.string :descripcion
       t.integer :establecimiento_id
       t.string :estado

@@ -13,10 +13,14 @@
 
   <table class="formulario">
     <tr><th><%= f.label :agente_id, "Agente" %></th><td><%= f.collection_select :agente_id, Agente.all, :id, :apellido_y_nombre %></td></tr>
-<!-- <tr>
-      <th><%= label "tipo_cargo", "Tipo de cargo" %></th>
-      <td><%= select "tipo_cargo", "tipo_cargo", options_for_select(AgenteCargo.tipos_cargos) %></td>
-    </tr> -->
+    <tr>
+      <th><%= label :tipo_cargo, "Tipo de cargo" %></th>
+      <td><%= f.select :tipo_cargo, options_for_select(AgenteCargo.tipos_cargos) %></td>
+    </tr>
+    <tr>
+      <th><%= label :tipo_horas, "Tipo de horas" %></th>
+      <td><%= f.select :tipo_horas, options_for_select(AgenteCargo.tipos_horas) %></td>
+    </tr>  
     <tr>
     <tr><th><%= f.label :cargo_id, "Cargo" %></th><td><%= f.collection_select :cargo_id, Cargo.all, :id, :nombre_completo %></td></tr>
     <tr>

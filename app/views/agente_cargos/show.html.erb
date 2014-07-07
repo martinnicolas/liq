@@ -12,31 +12,30 @@
 <p>
   <b>Agente: </b><%= Agente.find(@agente_cargo.agente_id).apellido_y_nombre %>
 </p>
-
 <p>
   <b>Cargo: </b><%= Cargo.find(@agente_cargo.cargo_id).nombre_completo %>
 </p>
-
 <p>
-  <b>Descripcion: </b><%= @agente_cargo.descripcion %>
+  <b>Tipo de cargo: </b><%= @agente_cargo.tipo_cargo %>
 </p>
-
+<p>
+  <b>Tipo de horas: </b><%= @agente_cargo.tipo_horas %>
+</p>
+<p>
+  <b>Descripción: </b><%= @agente_cargo.descripcion %>
+</p>
 <p>
   <b>Establecimiento: </b><%= Establecimiento.find(@agente_cargo.establecimiento_id).nombre_completo %>
 </p>
-
 <p>
   <b>Estado: </b><%= @agente_cargo.estado %>
 </p>
-
 <p>
-  <b>Fecha creacion: </b><%= @agente_cargo.fecha_creacion %>
+  <b>Fecha de creación: </b><%= @agente_cargo.fecha_creacion %>
 </p>
-
 <p>
-  <b>Cant horas: </b><%= @agente_cargo.cant_horas %>
+  <b>Cant. de horas: </b><%= @agente_cargo.cant_horas %>
 </p>
-
 <p>
   <b>Secuencia: </b><%= @agente_cargo.secuencia %>
 </p>

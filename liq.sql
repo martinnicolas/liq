@@ -2,9 +2,9 @@ CREATE DATABASE  IF NOT EXISTS `liq` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE
 USE `liq`;
 -- MySQL dump 10.13  Distrib 5.5.34, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: liq
+-- Host: 127.0.0.1    Database: liq
 -- ------------------------------------------------------
--- Server version 5.5.34-0ubuntu0.13.04.1
+-- Server version 5.5.27
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -276,6 +276,8 @@ CREATE TABLE `agente_cargos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `agente_id` int(11) DEFAULT NULL,
   `cargo_id` int(11) DEFAULT NULL,
+  `tipo_cargo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tipo_horas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `descripcion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `establecimiento_id` int(11) DEFAULT NULL,
   `estado` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -294,7 +296,7 @@ CREATE TABLE `agente_cargos` (
 
 LOCK TABLES `agente_cargos` WRITE;
 /*!40000 ALTER TABLE `agente_cargos` DISABLE KEYS */;
-INSERT INTO `agente_cargos` VALUES (1,3,279,'',1057,'ALT','2014-07-01',20,'001','2014-07-01 14:19:34','2014-07-01 14:20:02'),(2,5,669,'',1298,'ALT','2011-09-20',NULL,'','2014-07-03 12:46:19','2014-07-04 13:13:35');
+INSERT INTO `agente_cargos` VALUES (1,3,279,'HORAS','HORAS DE MEDIA','',1057,'ALT','2014-07-06',20,'001','2014-07-07 00:23:57','2014-07-07 00:23:57'),(2,5,282,'CARGO (AUXILIAR)','HORAS DE MEDIA','',1298,'ALT','2014-07-01',NULL,'','2014-07-07 00:28:26','2014-07-07 00:28:26');
 /*!40000 ALTER TABLE `agente_cargos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -315,4 +317,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-04 11:53:22
+-- Dump completed on 2014-07-06 21:38:54

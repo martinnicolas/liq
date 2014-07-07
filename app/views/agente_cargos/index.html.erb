@@ -7,7 +7,9 @@
 <table class="table table-striped">
   <tr>
     <th>Agente</th>
+    <th>Tipo de Cargo</th>
     <th>Cargo</th>
+    <th>Tipo de horas</th>
     <th>Establecimiento</th>
     <th>Cant. horas</th>
     <th>Estado</th>
@@ -19,7 +21,9 @@
 <% @agente_cargos.each do |agente_cargo| %>
   <tr>
     <td><%= Agente.find(agente_cargo.agente_id).apellido_y_nombre %></td>
-    <td><%= Cargo.find(agente_cargo.cargo_id).nombre_completo %></td>
+    <td><%= agente_cargo.tipo_cargo %></td>
+    <td><%= Cargo.find(agente_cargo.cargo_id).descripcion %></td>
+    <td><%= agente_cargo.tipo_horas %></td>
     <td><%= Establecimiento.find(agente_cargo.establecimiento_id).nombre_completo %></td>
     <td><%= agente_cargo.cant_horas %></td>
     <td><%= agente_cargo.estado %></td>
