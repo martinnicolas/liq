@@ -14,10 +14,10 @@ class AgenteCargo < ActiveRecord::Base
   end
 
   def self.tipos_cargos
-  	["CARGO (DOCENTE)","HORAS","CARGO (AUXILIAR)"]
+  	["C","H","A"]
   end
 
   def self.tipos_horas
-    ["HORAS DE MEDIA","HORAS DE SUPERIOR"]
+    ["M","S", ""]
   end
 end

@@ -30,7 +30,7 @@ class LiquidacionsController < ApplicationController
     @liquidacion = Liquidacion.new
 
     #Levanto de conceptos, todos los conceptos que son requeridos para liquidacion de auxiliares    
-    @conceptos = Concepto.where(:tipo_liquidacion => 'AUXILIAR', :requerido => 'SI')    
+    @conceptos = Concepto.where(:anhomes => 201407, :requerido => 'SI')    
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +42,7 @@ class LiquidacionsController < ApplicationController
   def edit
     
     #Levanto de conceptos, todos los conceptos que son requeridos para liquidacion de auxiliares    
-    @conceptos = Concepto.where(:tipo_liquidacion => 'AUXILIAR', :requerido => 'SI')    
+    @conceptos = Concepto.where(:anhomes => 201407, :requerido => 'SI')    
 
     #Levanto todos los conceptos incluidos en la liquidacion que se va a editar
     @liquidacion = Liquidacion.find(params[:id])
@@ -57,6 +57,8 @@ class LiquidacionsController < ApplicationController
 
     respond_to do |format|
       if @liquidacion.save
+
+        cargo = Cargo.find(AgenteCargo.find(@liquidacion.agente_cargo_id).cargo_id)
         
         #Levanto los conceptos seleccionados
         @conceptos_seleccionados = params[:codigos][:seleccionados]
@@ -68,7 +70,19 @@ class LiquidacionsController < ApplicationController
           @concepto_liquidacion.concepto_id = concepto_id
           @concepto_liquidacion.formula_calculo = "formula completa"
           @concepto_liquidacion.calculo = "formula solo con numeros"
-          @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_auxiliares
+          case cargo.tipo_cargo
+            when 'C'
+              @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_cargos              
+            when 'H'
+              if  cargo.nivel == 'M'
+                @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_horas_media
+              end
+              if  cargo.nivel == 'S'  
+                @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_horas_superior 
+              end           
+            when 'A'
+              @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_auxiliares    
+          end
           @concepto_liquidacion.save
         end    
 
@@ -85,6 +99,7 @@ class LiquidacionsController < ApplicationController
   # PUT /liquidacions/1.json
   def update
     @liquidacion = Liquidacion.find(params[:id])
+    cargo = Cargo.find(AgenteCargo.find(@liquidacion.agente_cargo_id).cargo_id)
 
     #Elimino todos los conceptos incluidos en la liquidacion
     @conceptos_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => @liquidacion.id)
@@ -103,6 +118,19 @@ class LiquidacionsController < ApplicationController
       @concepto_liquidacion.formula_calculo = "formula completa"
       @concepto_liquidacion.calculo = "formula solo con numeros"
       @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_auxiliares
+      case cargo.tipo_cargo
+        when 'C'
+          @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_cargos              
+        when 'H'
+          if  cargo.nivel == 'M'
+            @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_horas_media
+          end
+          if  cargo.nivel == 'S'  
+            @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_horas_superior 
+          end           
+        when 'A'
+          @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_auxiliares    
+      end
       @concepto_liquidacion.save
     end    
 
