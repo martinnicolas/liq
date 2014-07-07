@@ -48,7 +48,10 @@
         <%= f.radio_button :activado_x_defecto, 'NO' %>
       </td>
     </tr>    
-    <tr><th><%= f.label :tipo %></th><td><%= f.text_field :tipo %></td></tr>            
+    <tr>
+      <th><%= f.label :tipo, "Tipo de concepto" %></th>
+      <td><%= f.select :tipo, options_for_select(Concepto.tipos) %></td>
+    </tr>
   </table> 
 
   <div class="actions">

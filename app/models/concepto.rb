@@ -4,4 +4,7 @@ class Concepto < ActiveRecord::Base
   has_many :concepto_liquidacions
   has_many :liquidacions, :through => :concepto_liquidacions
 
+  def self.tipos
+  	["REMUNERATIVO","NO REMUNERATIVO","PATRONAL","TOTAL"]
+  end
 end

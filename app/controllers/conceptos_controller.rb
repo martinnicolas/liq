@@ -2,7 +2,7 @@ class ConceptosController < ApplicationController
   # GET /conceptos
   # GET /conceptos.json
   def index
-    @conceptos = Concepto.where(:anhomes => 201407)
+    @conceptos = Concepto.where(:anhomes => 201407).order(:codigo_concepto)
 
     respond_to do |format|
       format.html # index.html.erb
