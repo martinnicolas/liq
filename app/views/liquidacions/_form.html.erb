@@ -53,10 +53,12 @@
         %>  
         <%= check_box("codigos", "seleccionados", { :multiple => true, :checked => checked }, c.id, nil) %>
         </td>
-    <% else %>
-     <td><%= label_tag "codigos_seleccionados_#{c.id}", c.nombre %></td>
-    <td><%= text_field("codigos_seleccionados_",c.id, :value => number_with_precision(0.00, :precision => 2)) %></td>   
-    <% end %>
+      <% else %>
+        <td><%= label_tag "codigos_seleccionados_#{c.id}", c.nombre %></td>
+        <td>
+        <%= text_field("codigos_seleccionados_",c.id, :value => number_with_precision(0.00, :precision => 2)) %>
+        </td>   
+      <% end %>
     </tr>
   <% end %>
   </table>

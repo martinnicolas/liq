@@ -22,6 +22,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'dentaku', '~> 2.0.4'
+
 gem 'jquery-rails', '2.3.0'
 
 gem 'jquery-ui-rails'

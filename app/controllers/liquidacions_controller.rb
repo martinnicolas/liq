@@ -63,32 +63,59 @@ class LiquidacionsController < ApplicationController
       if @liquidacion.save
 
         cargo = Cargo.find(AgenteCargo.find(@liquidacion.agente_cargo_id).cargo_id)
-        
+
+        #Almaceno en memoria calculo del basico
+        calc = Dentaku::Calculator.new
+        calc.store(puntos_cargo: cargo.puntos)
+        calc.store(indice_cargo: cargo.indice)
+        calc.store(dias_trabajados: @liquidacion.dias_trabajados)
+
         #Levanto los conceptos seleccionados
         @conceptos_seleccionados = params[:codigos][:seleccionados]
 
-        #Creo el objeto ConceptoLiquidacion    
+        #Creo el objeto ConceptoLiquidacion y almaceno en Hash los conceptos que se deben calcular
+        need_to_compute = Hash.new
         @conceptos_seleccionados.each do | concepto_id |
           @concepto_liquidacion = ConceptoLiquidacion.new
           @concepto_liquidacion.liquidacion_id = @liquidacion.id
           @concepto_liquidacion.concepto_id = concepto_id
-          @concepto_liquidacion.formula_calculo = "formula completa"
-          @concepto_liquidacion.calculo = "formula solo con numeros"
-          case cargo.tipo_cargo
-            when 'C'
-              @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_cargos              
-            when 'H'
-              if  cargo.nivel == 'M'
-                @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_horas_media
-              end
-              if  cargo.nivel == 'S'  
-                @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_horas_superior 
-              end           
-            when 'A'
-              @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_auxiliares    
+          @concepto = Concepto.find(concepto_id)
+          codigo = "codigo#{@concepto.codigo_concepto}"
+          if @concepto.carga_manual == 'NO'
+            case cargo.tipo_cargo
+              when 'C'
+                need_to_compute[codigo] = @concepto.calculo_cargos
+              when 'H'
+                if  cargo.nivel == 'M'
+                  need_to_compute[codigo] = @concepto.calculo_horas_media
+                end
+                if  cargo.nivel == 'S'  
+                  need_to_compute[codigo] = @concepto.calculo_horas_superior
+                end           
+              when 'A'
+                need_to_compute[codigo] = @concepto.calculo_auxiliares
+            end
           end
+          codigo = "codigo#{@concepto.codigo_concepto}"          
+          @concepto_liquidacion.formula_calculo = need_to_compute[codigo]
+          @concepto_liquidacion.calculo = need_to_compute[codigo]
           @concepto_liquidacion.save
         end    
+
+        #Calculo todos los conceptos involucrados en la liquidacion
+        @resultado = calc.solve!(need_to_compute)
+
+        #Actualizo valor_calculado de cada concepto
+        @conceptos_en_liquidacion = ConceptoLiquidacion.all
+        @conceptos_en_liquidacion.each do | concepto_en_liq |
+          @concepto = Concepto.find(concepto_en_liq.concepto_id)
+          codigo = "codigo#{@concepto.codigo_concepto}"
+          @concepto_liquidacion = ConceptoLiquidacion.find(concepto_en_liq.id)
+          if @concepto.carga_manual == 'NO'            
+            @concepto_liquidacion.valor_calculado = @resultado[codigo]
+          end
+          @concepto_liquidacion.save
+        end
 
         format.html { redirect_to @liquidacion, notice: 'Se ha creado una nueva liquidacion' }
         format.json { render json: @liquidacion, status: :created, location: @liquidacion }
@@ -101,8 +128,9 @@ class LiquidacionsController < ApplicationController
 
   # PUT /liquidacions/1
   # PUT /liquidacions/1.json
-  def update
-    @liquidacion = Liquidacion.find(params[:id])
+  def update    
+    @liquidacion = Liquidacion.find(params[:id])    
+    @liquidacion.update_attributes(params[:liquidacion])
     cargo = Cargo.find(AgenteCargo.find(@liquidacion.agente_cargo_id).cargo_id)
 
     #Elimino todos los conceptos incluidos en la liquidacion
@@ -111,32 +139,58 @@ class LiquidacionsController < ApplicationController
       concepto.destroy
     end
 
+    #Almaceno en memoria calculo del basico
+    calc = Dentaku::Calculator.new
+    calc.store(puntos_cargo: cargo.puntos)
+    calc.store(indice_cargo: cargo.indice)
+    calc.store(dias_trabajados: @liquidacion.dias_trabajados)
+
     #Levanto los conceptos seleccionados
     @conceptos_seleccionados = params[:codigos][:seleccionados]
 
-    #Creo el objeto ConceptoLiquidacion    
+    #Creo el objeto ConceptoLiquidacion y almaceno en Hash los conceptos que se deben calcular
+    need_to_compute = Hash.new
     @conceptos_seleccionados.each do | concepto_id |
       @concepto_liquidacion = ConceptoLiquidacion.new
       @concepto_liquidacion.liquidacion_id = @liquidacion.id
       @concepto_liquidacion.concepto_id = concepto_id
-      @concepto_liquidacion.formula_calculo = "formula completa"
-      @concepto_liquidacion.calculo = "formula solo con numeros"
-      @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_auxiliares
-      case cargo.tipo_cargo
-        when 'C'
-          @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_cargos              
-        when 'H'
-          if  cargo.nivel == 'M'
-            @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_horas_media
-          end
-          if  cargo.nivel == 'S'  
-            @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_horas_superior 
-          end           
-        when 'A'
-          @concepto_liquidacion.valor_calculado = Concepto.find(concepto_id).calculo_auxiliares    
+      @concepto = Concepto.find(concepto_id)
+      codigo = "codigo#{@concepto.codigo_concepto}"
+      if @concepto.carga_manual == 'NO'
+        case cargo.tipo_cargo
+          when 'C'
+            need_to_compute[codigo] = @concepto.calculo_cargos
+          when 'H'
+            if  cargo.nivel == 'M'
+              need_to_compute[codigo] = @concepto.calculo_horas_media
+            end
+            if  cargo.nivel == 'S'  
+              need_to_compute[codigo] = @concepto.calculo_horas_superior
+            end           
+          when 'A'
+            need_to_compute[codigo] = @concepto.calculo_auxiliares
+        end
       end
+      codigo = "codigo#{@concepto.codigo_concepto}"          
+      @concepto_liquidacion.formula_calculo = need_to_compute[codigo]
+      @concepto_liquidacion.calculo = need_to_compute[codigo]
       @concepto_liquidacion.save
     end    
+
+    #Calculo todos los conceptos involucrados en la liquidacion
+    @resultado = calc.solve!(need_to_compute)
+
+    #Actualizo valor_calculado de cada concepto
+    @conceptos_en_liquidacion = ConceptoLiquidacion.all
+    @conceptos_en_liquidacion.each do | concepto_en_liq |
+      @concepto = Concepto.find(concepto_en_liq.concepto_id)
+      codigo = "codigo#{@concepto.codigo_concepto}"
+      @concepto_liquidacion = ConceptoLiquidacion.find(concepto_en_liq.id)
+      if @concepto.carga_manual == 'NO'  
+        @concepto_liquidacion.valor_calculado = @resultado[codigo]
+      end
+      @concepto_liquidacion.save
+    end
 
     respond_to do |format|
       if @liquidacion.update_attributes(params[:liquidacion])

@@ -35,7 +35,15 @@
         <%= f.label :requerido, 'NO' %>
         <%= f.radio_button :requerido, 'NO' %>
     </td>
-    <tr><th><%= f.label :carga_manual %></th><td><%= f.text_field :carga_manual %></td></tr>      
+    </tr>
+    <tr><th><%= f.label :carga_manual %></th>
+    <td>
+      <%= f.label :carga_manual, 'SI'%>
+      <%= f.radio_button :carga_manual, 'SI' %>
+      <%= f.label :carga_manual, 'NO' %>
+      <%= f.radio_button :carga_manual, 'NO' %>
+    </td>
+    </tr>      
     <tr><th><%= f.label :minimo, "Mínimo" %></th><td><%= f.text_field :minimo, :style => "width: 80px;" %></td></tr>      
     <tr><th><%= f.label :maixmo, "Máximo" %></th><td><%= f.text_field :maximo, :style => "width: 80px;" %></td></tr>      
     <tr><th><%= f.label :ayuda %></th><td><%= f.text_field :ayuda %></td></tr>      
