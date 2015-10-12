@@ -34,7 +34,7 @@ class LiquidacionsController < ApplicationController
     @liquidacion = Liquidacion.new
 
     #Levanto de conceptos, todos los conceptos que son requeridos para liquidacion de auxiliares    
-    @conceptos = Concepto.where(:anhomes => 201407, :requerido => 'SI').order(:codigo_concepto)    
+    @conceptos = Concepto.where(:anhomes => 201407).order(:codigo_concepto)    
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,7 +46,7 @@ class LiquidacionsController < ApplicationController
   def edit
     
     #Levanto de conceptos, todos los conceptos que son requeridos para liquidacion de auxiliares    
-    @conceptos = Concepto.where(:anhomes => 201407, :requerido => 'SI').order(:codigo_concepto)    
+    @conceptos = Concepto.where(:anhomes => 201407).order(:codigo_concepto)    
 
     #Levanto todos los conceptos incluidos en la liquidacion que se va a editar
     @liquidacion = Liquidacion.find(params[:id])
@@ -69,6 +69,7 @@ class LiquidacionsController < ApplicationController
         calc.store(puntos_cargo: cargo.puntos)
         calc.store(indice_cargo: cargo.indice)
         calc.store(dias_trabajados: @liquidacion.dias_trabajados)
+        calc.store(porcentaje_antiguedad: 20)
 
         #Levanto los conceptos seleccionados
         @conceptos_seleccionados = params[:codigos][:seleccionados]
@@ -144,6 +145,7 @@ class LiquidacionsController < ApplicationController
     calc.store(puntos_cargo: cargo.puntos)
     calc.store(indice_cargo: cargo.indice)
     calc.store(dias_trabajados: @liquidacion.dias_trabajados)
+    calc.store(porcentaje_antiguedad: 20)
 
     #Levanto los conceptos seleccionados
     @conceptos_seleccionados = params[:codigos][:seleccionados]
