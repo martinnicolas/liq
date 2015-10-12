@@ -61,15 +61,17 @@ class LiquidacionsController < ApplicationController
 
     respond_to do |format|
       if @liquidacion.save
-
-        cargo = Cargo.find(AgenteCargo.find(@liquidacion.agente_cargo_id).cargo_id)
+        agente_cargo = AgenteCargo.find(@liquidacion.agente_cargo_id)
+        cargo = Cargo.find(agente_cargo.cargo_id)
+        agente = Agente.find(agente_cargo.agente_id)
 
         #Almaceno en memoria calculo del basico
         calc = Dentaku::Calculator.new
         calc.store(puntos_cargo: cargo.puntos)
         calc.store(indice_cargo: cargo.indice)
         calc.store(dias_trabajados: @liquidacion.dias_trabajados)
-        calc.store(porcentaje_antiguedad: 20)
+        #Almaceno en memoria calculo del porcentaje de antiguedad
+        calc.store(porcentaje_antiguedad: agente.porcentaje_antiguedad)
 
         #Levanto los conceptos seleccionados
         @conceptos_seleccionados = params[:codigos][:seleccionados]
@@ -132,7 +134,9 @@ class LiquidacionsController < ApplicationController
   def update    
     @liquidacion = Liquidacion.find(params[:id])    
     @liquidacion.update_attributes(params[:liquidacion])
-    cargo = Cargo.find(AgenteCargo.find(@liquidacion.agente_cargo_id).cargo_id)
+    agente_cargo = AgenteCargo.find(@liquidacion.agente_cargo_id)
+    cargo = Cargo.find(agente_cargo.cargo_id)
+    agente = Agente.find(agente_cargo.agente_id)
 
     #Elimino todos los conceptos incluidos en la liquidacion
     @conceptos_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => @liquidacion.id)
@@ -145,7 +149,8 @@ class LiquidacionsController < ApplicationController
     calc.store(puntos_cargo: cargo.puntos)
     calc.store(indice_cargo: cargo.indice)
     calc.store(dias_trabajados: @liquidacion.dias_trabajados)
-    calc.store(porcentaje_antiguedad: 20)
+    #Almaceno en memoria calculo del porcentaje de antiguedad
+    calc.store(porcentaje_antiguedad: agente.porcentaje_antiguedad)
 
     #Levanto los conceptos seleccionados
     @conceptos_seleccionados = params[:codigos][:seleccionados]

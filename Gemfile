@@ -24,6 +24,8 @@ end
 
 gem 'dentaku', '~> 2.0.4'
 
+gem 'time_diff', '~> 0.3.0'
+
 gem 'jquery-rails', '2.3.0'
 
 gem 'jquery-ui-rails'

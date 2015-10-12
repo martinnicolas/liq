@@ -100,6 +100,9 @@ GEM
       ref
     thor (0.19.1)
     tilt (1.4.1)
+    time_diff (0.3.0)
+      activesupport
+      i18n
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -126,5 +129,6 @@ DEPENDENCIES
   mysql2
   rails (= 3.2.8)
   therubyracer
+  time_diff (~> 0.3.0)
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
