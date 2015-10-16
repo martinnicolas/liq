@@ -69,9 +69,10 @@ class LiquidacionsController < ApplicationController
         calc = Dentaku::Calculator.new
         calc.store(puntos_cargo: cargo.puntos)
         calc.store(indice_cargo: cargo.indice)
+        calc.store(cantidad_horas: agente_cargo.cant_horas)
         calc.store(dias_trabajados: @liquidacion.dias_trabajados)
         #Almaceno en memoria calculo del porcentaje de antiguedad
-        calc.store(porcentaje_antiguedad: agente.porcentaje_antiguedad)
+        calc.store(porcentaje_antiguedad: agente_cargo.porcentaje_antiguedad)
 
         #Levanto los conceptos seleccionados
         @conceptos_seleccionados = params[:codigos][:seleccionados]
@@ -148,9 +149,10 @@ class LiquidacionsController < ApplicationController
     calc = Dentaku::Calculator.new
     calc.store(puntos_cargo: cargo.puntos)
     calc.store(indice_cargo: cargo.indice)
+    calc.store(cantidad_horas: agente_cargo.cant_horas)
     calc.store(dias_trabajados: @liquidacion.dias_trabajados)
     #Almaceno en memoria calculo del porcentaje de antiguedad
-    calc.store(porcentaje_antiguedad: agente.porcentaje_antiguedad)
+    calc.store(porcentaje_antiguedad: agente_cargo.porcentaje_antiguedad)
 
     #Levanto los conceptos seleccionados
     @conceptos_seleccionados = params[:codigos][:seleccionados]
