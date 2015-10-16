@@ -31,7 +31,7 @@
   <b>Estado: </b><%= @agente_cargo.estado %>
 </p>
 <p>
-  <b>Fecha de creación: </b><%= @agente_cargo.fecha_creacion %>
+  <b>Fecha de creación: </b><%= @agente_cargo.fecha_creacion.strftime('%d/%m/%Y') %>
 </p>
 <p>
   <b>Cant. de horas: </b><%= @agente_cargo.cant_horas %>

@@ -22,7 +22,7 @@
     <td><%= agente.apellido %></td>
     <td><%= agente.nombre %></td>
     <td><%= Localidad.find(agente.localidad_id).nombre %></td>
-    <td><%= agente.fecha_ingreso %></td>
+    <td><%= agente.fecha_ingreso.strftime('%d/%m/%Y') %></td>
     <td>
         <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span>

@@ -10,7 +10,7 @@
 <% end %>
 
 <p>
-  <b>Fecha: </b><%= @liquidacion.fecha %>
+  <b>Fecha: </b><%= @liquidacion.fecha.strftime('%d/%m/%Y') %>
   <b>Tipo de liquidación: </b><%= @liquidacion.tipo_liquidacion %>
 </p>
 <p>

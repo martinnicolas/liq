@@ -91,6 +91,9 @@ ActiveRecord::Schema.define(:version => 20140702122837) do
     t.string   "nombre"
     t.string   "direccion"
     t.integer  "cue"
+    t.float    "zona"
+    t.float    "ubicacion_cargos"
+    t.float    "ubicacion_horas"
     t.integer  "localidad_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false

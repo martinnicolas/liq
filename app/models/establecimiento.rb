@@ -1,5 +1,5 @@
 class Establecimiento < ActiveRecord::Base
-  attr_accessible :cue, :direccion, :localidad_id, :nombre, :numero
+  attr_accessible :cue, :zona, :ubicacion_cargos, :ubicacion_horas, :direccion, :localidad_id, :nombre, :numero
 
   has_one :localidad
 

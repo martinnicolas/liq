@@ -24,6 +24,15 @@
     <tr>
       <th><%= f.label :cue, "CUE" %></th><td><%= f.text_field :cue, :style => "width: 100px;" %></td>
     </tr>
+    <tr>
+      <th><%= f.label :zona, "Zona" %></th><td><%= f.text_field :zona, :style => "width: 100px;" %></td>
+    </tr>
+    <tr>
+    <th><%= f.label :ubicacion_cargos, "Ubicacion cargos" %></th><td><%= f.text_field :ubicacion_cargos, :style => "width: 100px;" %></td>
+    </tr>
+    <tr>
+    <th><%= f.label :ubicacion_horas, "Ubicacion horas" %></th><td><%= f.text_field :ubicacion_horas, :style => "width: 100px;" %></td>
+    </tr>
     <tr><th><%= f.label :localidad_id, "Localidad" %></th><td><%= f.collection_select :localidad_id, Localidad.all, :id, :nombre %></td></tr>    
   </table> 
 

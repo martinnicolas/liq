@@ -64,6 +64,7 @@ class LiquidacionsController < ApplicationController
         agente_cargo = AgenteCargo.find(@liquidacion.agente_cargo_id)
         cargo = Cargo.find(agente_cargo.cargo_id)
         agente = Agente.find(agente_cargo.agente_id)
+        establecimiento = Establecimiento.find(agente_cargo.establecimiento_id)
 
         #Almaceno en memoria calculo del basico
         calc = Dentaku::Calculator.new
@@ -73,6 +74,9 @@ class LiquidacionsController < ApplicationController
         calc.store(dias_trabajados: @liquidacion.dias_trabajados)
         #Almaceno en memoria calculo del porcentaje de antiguedad
         calc.store(porcentaje_antiguedad: agente_cargo.porcentaje_antiguedad)
+        #Almaceno en la zona para el calculo de Zona Patagonica
+        calc.store(zona: establecimiento.zona)
+
 
         #Levanto los conceptos seleccionados
         @conceptos_seleccionados = params[:codigos][:seleccionados]
@@ -138,6 +142,7 @@ class LiquidacionsController < ApplicationController
     agente_cargo = AgenteCargo.find(@liquidacion.agente_cargo_id)
     cargo = Cargo.find(agente_cargo.cargo_id)
     agente = Agente.find(agente_cargo.agente_id)
+    establecimiento = Establecimiento.find(agente_cargo.establecimiento_id)
 
     #Elimino todos los conceptos incluidos en la liquidacion
     @conceptos_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => @liquidacion.id)
@@ -153,6 +158,8 @@ class LiquidacionsController < ApplicationController
     calc.store(dias_trabajados: @liquidacion.dias_trabajados)
     #Almaceno en memoria calculo del porcentaje de antiguedad
     calc.store(porcentaje_antiguedad: agente_cargo.porcentaje_antiguedad)
+    #Almaceno en la zona para el calculo de Zona Patagonica
+    calc.store(zona: establecimiento.zona)
 
     #Levanto los conceptos seleccionados
     @conceptos_seleccionados = params[:codigos][:seleccionados]

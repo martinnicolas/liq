@@ -17,7 +17,7 @@
 
 <% @liquidacions.each do |liquidacion| %>
   <tr>
-    <td><%= liquidacion.fecha %></td>
+    <td><%= liquidacion.fecha.strftime('%d/%m/%Y') %></td>
     <td><%= liquidacion.tipo_liquidacion %></td>
     <td><%= Agente.find(AgenteCargo.find(liquidacion.agente_cargo_id).agente_id).apellido_y_nombre %></td>
     <td><%= AgenteCargo.find(liquidacion.agente_cargo_id).nombre %></td>
