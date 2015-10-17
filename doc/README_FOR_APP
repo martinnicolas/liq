@@ -1,13 +1,2 @@
 Use this README file to introduce your application and point to useful places in the API for learning more.
 Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
-
-@concepto_liquidacion = ConceptoLiquidacion.select("*")
-    .joins('LEFT JOIN liquidacions ON liquidacions.id = concepto_liquidacions.liquidacion_id')
-    .joins('RIGHT JOIN conceptos ON conceptos.id = concepto_liquidacions.concepto_id')
-    .where(:liquidacion_id => @liquidacion.id)
-    .order('conceptos.codigo_concepto')
-
-@conceptos = HistorialConcepto.select("*")
-    .joins('INNER JOIN concepto ON historial_concepto.id = concepto.id')
-    .where(:anio => 2015, :mes => 9)
-    .order('conceptos.codigo')
