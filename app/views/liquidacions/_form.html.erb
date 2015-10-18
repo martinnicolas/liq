@@ -28,11 +28,14 @@
   </div>  
 
   <table class="table table-striped" style="width:50%;">
+    <thead>
     <tr>
       <th>Código</th>
       <th>Concepto</th>
       <th>&nbsp;</th>
     <tr>  
+    </thead>
+    <tbody>
   <% @conceptos.each do |c| %>  
     <tr>
       <td><%= c.codigo_concepto.to_s %></td>
@@ -56,11 +59,12 @@
       <% else %>
         <td><%= label_tag "codigos_seleccionados_#{c.id}", c.nombre %></td>
         <td>
-        <%= text_field("codigos_seleccionados_",c.id, :value => number_with_precision(0.00, :precision => 2)) %>
+        <%= text_field("codigos_seleccionados_",c.id, :value => number_with_precision(0.00, :precision => 2), :style => 'width: 80px;') %>
         </td>   
       <% end %>
     </tr>
   <% end %>
+    </tbody>
   </table>
 
   <div class="actions">
