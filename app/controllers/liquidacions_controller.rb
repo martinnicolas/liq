@@ -191,7 +191,6 @@ class LiquidacionsController < ApplicationController
       total = calcular_total_remunerativo(@total_remunerativo)
       calc.store(total_remunerativo: total)
       @total_no_remunerativo = calc.solve!(conceptos_no_remunerativos)
-      debugger
 
       #Actualizo valor_calculado de cada concepto
       @conceptos_en_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => liquidacion.id)
