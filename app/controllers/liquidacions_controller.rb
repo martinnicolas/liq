@@ -51,7 +51,6 @@ class LiquidacionsController < ApplicationController
     #Levanto todos los conceptos incluidos en la liquidacion que se va a editar
     @liquidacion = Liquidacion.find(params[:id])
     @conceptos_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => @liquidacion.id).pluck(:concepto_id)
-
   end
 
   # POST /liquidacions
@@ -115,72 +114,113 @@ class LiquidacionsController < ApplicationController
       format.json { head :no_content }
     end
   end
-end
+
+  def calcular_conceptos liquidacion
+    agente_cargo = AgenteCargo.find(liquidacion.agente_cargo_id)
+    cargo = Cargo.find(agente_cargo.cargo_id)
+    agente = Agente.find(agente_cargo.agente_id)
+    establecimiento = Establecimiento.find(agente_cargo.establecimiento_id)
+
+    #Almaceno en memoria calculo del basico
+    calc = Dentaku::Calculator.new
+    calc.store(puntos_cargo: cargo.puntos)
+    calc.store(indice_cargo: cargo.indice)
+    calc.store(cantidad_horas: agente_cargo.cant_horas)
+    calc.store(dias_trabajados: liquidacion.dias_trabajados)
+    #Almaceno en memoria calculo del porcentaje de antiguedad
+    calc.store(porcentaje_antiguedad: agente_cargo.porcentaje_antiguedad)
+    #Almaceno en la zona para el calculo de Zona Patagonica
+    calc.store(zona: establecimiento.zona)
 
 
-def calcular_conceptos liquidacion
+    #Levanto los conceptos seleccionados
+    @conceptos_seleccionados = params[:codigos][:seleccionados]
 
-  agente_cargo = AgenteCargo.find(liquidacion.agente_cargo_id)
-  cargo = Cargo.find(agente_cargo.cargo_id)
-  agente = Agente.find(agente_cargo.agente_id)
-  establecimiento = Establecimiento.find(agente_cargo.establecimiento_id)
-
-  #Almaceno en memoria calculo del basico
-  calc = Dentaku::Calculator.new
-  calc.store(puntos_cargo: cargo.puntos)
-  calc.store(indice_cargo: cargo.indice)
-  calc.store(cantidad_horas: agente_cargo.cant_horas)
-  calc.store(dias_trabajados: liquidacion.dias_trabajados)
-  #Almaceno en memoria calculo del porcentaje de antiguedad
-  calc.store(porcentaje_antiguedad: agente_cargo.porcentaje_antiguedad)
-  #Almaceno en la zona para el calculo de Zona Patagonica
-  calc.store(zona: establecimiento.zona)
-
-
-  #Levanto los conceptos seleccionados
-  @conceptos_seleccionados = params[:codigos][:seleccionados]
-
-  #Creo el objeto ConceptoLiquidacion y almaceno en Hash los conceptos que se deben calcular
-  need_to_compute = Hash.new
-  @conceptos_seleccionados.each do | concepto_id |
-    @concepto_liquidacion = ConceptoLiquidacion.new
-    @concepto_liquidacion.liquidacion_id = @liquidacion.id
-    @concepto_liquidacion.concepto_id = concepto_id
-    @concepto = Concepto.find(concepto_id)
-    codigo = "codigo#{@concepto.codigo_concepto}"
-    if @concepto.carga_manual == 'NO'
-      case cargo.tipo_cargo
-        when 'C'
-          need_to_compute[codigo] = @concepto.calculo_cargos
-        when 'H'
-          if  cargo.nivel == 'M'
-            need_to_compute[codigo] = @concepto.calculo_horas_media
-          end
-          if  cargo.nivel == 'S'  
-            need_to_compute[codigo] = @concepto.calculo_horas_superior
-          end           
-        when 'A'
-            need_to_compute[codigo] = @concepto.calculo_auxiliares
+    #Creo el objeto ConceptoLiquidacion y almaceno en Hash los conceptos que se deben calcular
+    conceptos_no_remunerativos = Hash.new
+    conceptos_remunerativos = Hash.new
+    @conceptos_seleccionados.each do | concepto_id |
+      @concepto_liquidacion = ConceptoLiquidacion.new
+      @concepto_liquidacion.liquidacion_id = @liquidacion.id
+      @concepto_liquidacion.concepto_id = concepto_id
+      @concepto = Concepto.find(concepto_id)
+      codigo = "codigo#{@concepto.codigo_concepto}"
+      if @concepto.carga_manual == 'NO'        
+        case cargo.tipo_cargo
+          when 'C'
+            if @concepto.tipo == 'REMUNERATIVO'
+              conceptos_remunerativos[codigo] = @concepto.calculo_cargos              
+            else
+              conceptos_no_remunerativos[codigo] = @concepto.calculo_cargos
+            end
+          when 'H'
+            if  cargo.nivel == 'M'
+              if @concepto.tipo == 'REMUNERATIVO'
+                conceptos_remunerativos[codigo] = @concepto.calculo_horas_media                
+              else
+                conceptos_no_remunerativos[codigo] = @concepto.calculo_horas_media
+              end
+            end
+            if  cargo.nivel == 'S'  
+              if @concepto.tipo == 'REMUNERATIVO'
+                conceptos_remunerativos[codigo] = @concepto.calculo_horas_superior
+              else
+                conceptos_no_remunerativos[codigo] = @concepto.calculo_horas_superior                
+              end
+            end           
+          when 'A'
+            if @concepto.tipo == 'REMUNERATIVO'
+              conceptos_remunerativos[codigo] = @concepto.calculo_auxiliares              
+            else
+              conceptos_no_remunerativos[codigo] = @concepto.calculo_auxiliares
+            end
         end
+        codigo = "codigo#{@concepto.codigo_concepto}"  
+        if @concepto.tipo == 'REMUNERATIVO'        
+          @concepto_liquidacion.formula_calculo = conceptos_remunerativos[codigo]
+          @concepto_liquidacion.calculo = conceptos_remunerativos[codigo]
+        else          
+          @concepto_liquidacion.formula_calculo = conceptos_no_remunerativos[codigo]
+          @concepto_liquidacion.calculo = conceptos_no_remunerativos[codigo]
+        end
+        @concepto_liquidacion.save
+      end    
+
+      #Calculo todos los conceptos involucrados en la liquidacion
+      @total_remunerativo = calc.solve!(conceptos_remunerativos)
+      total = calcular_total_remunerativo(@total_remunerativo)
+      calc.store(total_remunerativo: total)
+      @total_no_remunerativo = calc.solve!(conceptos_no_remunerativos)
+      debugger
+
+      #Actualizo valor_calculado de cada concepto
+      @conceptos_en_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => liquidacion.id)
+      @conceptos_en_liquidacion.each do | concepto_en_liq |
+        @concepto = Concepto.find(concepto_en_liq.concepto_id)
+        codigo = "codigo#{@concepto.codigo_concepto}"
+        @concepto_liquidacion = ConceptoLiquidacion.find(concepto_en_liq.id)
+        if @concepto.carga_manual == 'NO'                      
+          if @concepto.tipo == 'REMUNERATIVO'
+            @concepto_liquidacion.calculo = conceptos_remunerativos[codigo]
+            @concepto_liquidacion.valor_calculado = @total_remunerativo[codigo]            
+          else 
+            if @concepto.tipo == 'DESCUENTO'          
+              @total_no_remunerativo[codigo] = @total_no_remunerativo[codigo] * -1 #Si es un descuento debo restar el valor calculado
+            end
+            @concepto_liquidacion.calculo = conceptos_no_remunerativos[codigo]
+            @concepto_liquidacion.valor_calculado = @total_no_remunerativo[codigo]
+          end
+        end
+        @concepto_liquidacion.save
       end
-      codigo = "codigo#{@concepto.codigo_concepto}"          
-      @concepto_liquidacion.formula_calculo = need_to_compute[codigo]
-      @concepto_liquidacion.calculo = need_to_compute[codigo]
-      @concepto_liquidacion.save
-    end    
-
-    #Calculo todos los conceptos involucrados en la liquidacion
-    @resultado = calc.solve!(need_to_compute)
-
-    #Actualizo valor_calculado de cada concepto
-    @conceptos_en_liquidacion = ConceptoLiquidacion.all
-    @conceptos_en_liquidacion.each do | concepto_en_liq |
-    @concepto = Concepto.find(concepto_en_liq.concepto_id)
-    codigo = "codigo#{@concepto.codigo_concepto}"
-    @concepto_liquidacion = ConceptoLiquidacion.find(concepto_en_liq.id)
-    if @concepto.carga_manual == 'NO'            
-      @concepto_liquidacion.valor_calculado = @resultado[codigo]
     end
-    @concepto_liquidacion.save
   end
+
+  def calcular_total_remunerativo hash
+    p hash.inject(0) { |sum, tuple| sum += tuple[1] }
+  end
+
 end
+
+
+

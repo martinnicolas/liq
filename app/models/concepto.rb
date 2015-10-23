@@ -5,6 +5,6 @@ class Concepto < ActiveRecord::Base
   has_many :liquidacions, :through => :concepto_liquidacions
 
   def self.tipos
-  	["REMUNERATIVO","NO REMUNERATIVO","PATRONAL","TOTAL"]
+  	["REMUNERATIVO","NO REMUNERATIVO","PATRONAL","DESCUENTO"]
   end
 end
