@@ -185,33 +185,33 @@ class LiquidacionsController < ApplicationController
         end
         @concepto_liquidacion.save
       end    
+    end
 
-      #Calculo todos los conceptos involucrados en la liquidacion
-      @total_remunerativo = calc.solve!(conceptos_remunerativos)
-      total = calcular_total_remunerativo(@total_remunerativo)
-      calc.store(total_remunerativo: total)
-      @total_no_remunerativo = calc.solve!(conceptos_no_remunerativos)
+    #Calculo todos los conceptos involucrados en la liquidacion
+    @total_remunerativo = calc.solve!(conceptos_remunerativos)
+    total = calcular_total_remunerativo(@total_remunerativo)
+    calc.store(total_remunerativo: total)
+    @total_no_remunerativo = calc.solve!(conceptos_no_remunerativos)
 
-      #Actualizo valor_calculado de cada concepto
-      @conceptos_en_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => liquidacion.id)
-      @conceptos_en_liquidacion.each do | concepto_en_liq |
-        @concepto = Concepto.find(concepto_en_liq.concepto_id)
-        codigo = "codigo#{@concepto.codigo_concepto}"
-        @concepto_liquidacion = ConceptoLiquidacion.find(concepto_en_liq.id)
-        if @concepto.carga_manual == 'NO'                      
-          if @concepto.tipo == 'REMUNERATIVO'
-            @concepto_liquidacion.calculo = conceptos_remunerativos[codigo]
-            @concepto_liquidacion.valor_calculado = @total_remunerativo[codigo]            
-          else 
-            if @concepto.tipo == 'DESCUENTO'          
-              @total_no_remunerativo[codigo] = @total_no_remunerativo[codigo] * -1 #Si es un descuento debo restar el valor calculado
-            end
-            @concepto_liquidacion.calculo = conceptos_no_remunerativos[codigo]
-            @concepto_liquidacion.valor_calculado = @total_no_remunerativo[codigo]
+    #Actualizo valor_calculado de cada concepto
+    @conceptos_en_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => liquidacion.id)
+    @conceptos_en_liquidacion.each do | concepto_en_liq |
+      @concepto = Concepto.find(concepto_en_liq.concepto_id)
+      codigo = "codigo#{@concepto.codigo_concepto}"
+      @concepto_liquidacion = ConceptoLiquidacion.find(concepto_en_liq.id)
+      if @concepto.carga_manual == 'NO'                      
+        if @concepto.tipo == 'REMUNERATIVO'
+          @concepto_liquidacion.calculo = conceptos_remunerativos[codigo]
+          @concepto_liquidacion.valor_calculado = @total_remunerativo[codigo]            
+        else 
+          if @concepto.tipo == 'DESCUENTO'          
+            @total_no_remunerativo[codigo] = @total_no_remunerativo[codigo] * -1 #Si es un descuento debo restar el valor calculado
           end
+          @concepto_liquidacion.calculo = conceptos_no_remunerativos[codigo]
+          @concepto_liquidacion.valor_calculado = @total_no_remunerativo[codigo]
         end
-        @concepto_liquidacion.save
       end
+      @concepto_liquidacion.save
     end
   end
 
