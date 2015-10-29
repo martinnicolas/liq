@@ -188,8 +188,9 @@ class LiquidacionsController < ApplicationController
     end
 
     #Calculo todos los conceptos involucrados en la liquidacion
+    calc.store(ajuste_centavos: 0)
     @total_remunerativo = calc.solve!(conceptos_remunerativos)
-    total = calcular_total_remunerativo(@total_remunerativo)
+    total = calcular_total(@total_remunerativo)
     calc.store(total_remunerativo: total)
     @total_no_remunerativo = calc.solve!(conceptos_no_remunerativos)
 
@@ -205,7 +206,7 @@ class LiquidacionsController < ApplicationController
           @concepto_liquidacion.valor_calculado = @total_remunerativo[codigo]            
         else 
           if @concepto.tipo == 'DESCUENTO'          
-            @total_no_remunerativo[codigo] = @total_no_remunerativo[codigo] * -1 #Si es un descuento debo restar el valor calculado
+            @total_no_remunerativo[codigo] *= -1 #Si es un descuento debo restar el valor calculado
           end
           @concepto_liquidacion.calculo = conceptos_no_remunerativos[codigo]
           @concepto_liquidacion.valor_calculado = @total_no_remunerativo[codigo]
@@ -213,9 +214,32 @@ class LiquidacionsController < ApplicationController
       end
       @concepto_liquidacion.save
     end
+    calcular_ajuste_centavos(@liquidacion)
   end
 
-  def calcular_total_remunerativo hash
+  def calcular_ajuste_centavos liquidacion
+    #Obtengo todos los conceptos de la liquidacion
+    @concepto_liquidacion = ConceptoLiquidacion.select("*")
+    .joins('LEFT JOIN liquidacions ON liquidacions.id = concepto_liquidacions.liquidacion_id')
+    .joins('RIGHT JOIN conceptos ON conceptos.id = concepto_liquidacions.concepto_id')
+    .where(:liquidacion_id => liquidacion.id)
+    .order('conceptos.codigo_concepto')
+
+    total = @concepto_liquidacion.sum(:valor_calculado).modulo(1) * -1
+
+    @conceptos_en_liquidacion = ConceptoLiquidacion.where(:liquidacion_id => liquidacion.id)
+    @conceptos_en_liquidacion.each do | concepto_en_liq |
+      @concepto = Concepto.find(concepto_en_liq.concepto_id)
+      @concepto_liquidacion = ConceptoLiquidacion.find(concepto_en_liq.id)
+      codigo = @concepto.codigo_concepto
+      if codigo == 1899
+        @concepto_liquidacion.valor_calculado = total
+      end
+    end
+    @concepto_liquidacion.save
+  end
+
+  def calcular_total hash
     p hash.inject(0) { |sum, tuple| sum += tuple[1] }
   end
 
