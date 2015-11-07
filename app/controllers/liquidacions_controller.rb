@@ -239,6 +239,7 @@ class LiquidacionsController < ApplicationController
     @concepto_liquidacion.save
   end
 
+  #Calculo el total de la sumatoria de los elementos contenidos en el hash
   def calcular_total hash
     p hash.inject(0) { |sum, tuple| sum += tuple[1] }
   end
